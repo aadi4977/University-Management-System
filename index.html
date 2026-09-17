@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard &middot; University Management System</title>
+<!-- Uses the same stylesheet as the rest of the project, so this
+     skeleton is already styled once you drop it into the css/ folder. -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- app-shell = the whole dashboard layout: sidebar + main area side by side -->
+<div class="app-shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+
+    <!-- Brand / logo block at the top of the sidebar -->
+    <div class="sidebar-brand">
+      <div class="mark">UMS</div>
+      <div class="tagline">GLA University, Mathura</div>
+    </div>
+
+    <!-- Navigation links — one <a> per section of the dashboard.
+         data-section must match the id of the <section> it points to. -->
+    <nav class="sidebar-nav">
+      <a href="#dashboard" data-section="dashboard" class="active">Dashboard</a>
+      <a href="#students" data-section="students">Students</a>
+      <a href="#faculty" data-section="faculty">Faculty</a>
+    </nav>
+
+    <!-- Logged-in user info + sign out, pinned to the bottom -->
+    <div class="sidebar-foot">
+      <div class="user" id="sfUserName">User Name</div>
+      <div class="role">Role</div>
+      <button class="logout" id="logoutBtn">Sign out</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN AREA ============ -->
+  <div class="main">
+
+    <!-- Top bar: page title on the left, role badge on the right -->
+    <header class="topbar">
+      <div>
+        <h1>Dashboard</h1>
+        <div class="topbar-sub">Overview of the system</div>
+      </div>
+      <div class="topbar-actions">
+        <span class="role-tag">Role</span>
+      </div>
+    </header>
+
+    <!-- Scrollable content area — every dashboard section goes here -->
+    <div class="content">
+
+      <!-- Quick-glance summary numbers at the top of the dashboard -->
+      <section id="dashboard">
+        <div class="stat-strip">
+          <div class="stat"><div class="value">0</div><div class="label">Total students</div></div>
+          <div class="stat"><div class="value">0</div><div class="label">Total faculty</div></div>
+          <div class="stat"><div class="value">0</div><div class="label">Total courses</div></div>
+        </div>
+      </section>
+
+      <!-- Example section: replace with a real table once the data layer is ready -->
+      <section id="students" style="margin-top:32px">
+        <div class="section-head">
+          <h2>Students</h2>
+        </div>
+        <div class="table-wrap">
+          <div class="empty-state">
+            <strong>No data yet</strong>
+            This section will list student records once connected to js/data.js.
+          </div>
+        </div>
+      </section>
+
+      <!-- Repeat the same pattern for Faculty, Courses, Fees, etc. -->
+      <section id="faculty" style="margin-top:32px">
+        <div class="section-head">
+          <h2>Faculty</h2>
+        </div>
+        <div class="table-wrap">
+          <div class="empty-state">
+            <strong>No data yet</strong>
+            This section will list faculty records once connected to js/data.js.
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- Scripts go last, right before the closing body tag, so the
+     page content loads first. Add these once the logic is ready. -->
+<!--
+<script src="js/data.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+-->
+
+</body>
+</html>
