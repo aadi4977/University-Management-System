@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - UMS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar">
+    <div class="logo">UMS</div>
+    <ul class="nav-links">
+      <li><a href="admin-dashboard.html">Dashboard</a></li>
+      <li><a href="manage-students.html">Students</a></li>
+      <li><a href="manage-faculty.html">Faculty</a></li>
+      <li><a href="manage-courses.html">Courses</a></li>
+      <li><a href="fee.html">Fees</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main class="dashboard">
+    <h2>Welcome, Admin</h2>
+
+    <!-- quick stats, values will come from JS/localStorage later -->
+    <div class="stats">
+      <div class="card">
+        <h3>Total Students</h3>
+        <p>0</p>
+      </div>
+      <div class="card">
+        <h3>Total Faculty</h3>
+        <p>0</p>
+      </div>
+      <div class="card">
+        <h3>Total Courses</h3>
+        <p>0</p>
+      </div>
+      <div class="card">
+        <h3>Fee Collected</h3>
+        <p>Rs. 0</p>
+      </div>
+    </div>
+
+    <div class="quick-links">
+      <a href="manage-students.html">Manage Students</a>
+      <a href="manage-faculty.html">Manage Faculty</a>
+      <a href="manage-courses.html">Manage Courses</a>
+      <a href="fee.html">Manage Fees</a>
+    </div>
+  </main>
+
+</body>
+</html>
