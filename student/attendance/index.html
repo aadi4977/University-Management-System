@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Attendance - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <ul class="side-nav">
+      <li><a href="../dashboard/index.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a href="index.html" class="active"><i class="bi bi-calendar-check-fill"></i>My Attendance</a></li>
+      <li><a href="../result/index.html"><i class="bi bi-bar-chart-fill"></i>My Results</a></li>
+      <li><a href="#"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+      <li><a href="#"><i class="bi bi-cash-coin"></i>Fee Status</a></li>
+      <li><a href="#"><i class="bi bi-clock-history"></i>Timetable</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <ul class="side-nav">
+        <li><a href="../../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="main">
+    <header class="topbar">
+      <div class="topbar-search">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search for courses, notices, or anything...">
+      </div>
+      <div class="topbar-right">
+        <div class="notif-wrap">
+          <input type="checkbox" id="notif-toggle" class="notif-toggle-input">
+          <label for="notif-toggle" class="topbar-bell" aria-label="Notifications">
+            <i class="bi bi-bell-fill"></i>
+            <span class="notif-badge">1</span>
+          </label>
+          <div class="notif-panel">
+            <div class="notif-panel-header">Notifications</div>
+            <ul class="notif-list">
+            <li>
+              <i class="bi bi-journal-bookmark-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Mid-Term Examination schedule published</div>
+                <div class="notif-time">5 hours ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-cash-coin notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Fee payment reminder -- due by Oct 3</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-mortarboard-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Semester V results have been declared</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-calendar-event-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">New event: Tech Talk on Sep 28</div>
+                <div class="notif-time">2 days ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-exclamation-circle-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Attendance below 75% in Competitive Programming</div>
+                <div class="notif-time">2 days ago</div>
+              </div>
+            </li>
+            </ul>
+            <div class="notif-panel-footer">This is sample data -- not wired to anything yet.</div>
+          </div>
+        </div>
+        <div class="topbar-profile">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Abhishek Vishwakarma</div>
+            <div class="sub">Roll No. 21BCE1234</div>
+          </div>
+          <i class="bi bi-chevron-down profile-chevron"></i>
+        </div>
+      </div>
+    </header>
+
+      <div class="content">
+
+        <nav class="breadcrumb">
+          <a href="../dashboard/index.html"><i class="bi bi-house-door"></i>Dashboard</a>
+          <span class="sep">&rsaquo;</span>
+          <span class="current">My Attendance</span>
+        </nav>
+
+        <div class="page-header">
+          <div>
+            <h1>My Attendance</h1>
+            <p>Keep track of your classes and attendance. Regular attendance leads to better learning!</p>
+          </div>
+          <select class="page-select">
+            <option>Semester V (Jul 2025 &ndash; Dec 2025)</option>
+          </select>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="bi bi-people-fill"></i></div>
+            <div>
+              <div class="stat-value">78%</div>
+              <div class="stat-label">Overall Attendance</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="bi bi-journal-bookmark-fill"></i></div>
+            <div>
+              <div class="stat-value">6</div>
+              <div class="stat-label">Total Subjects</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-check-circle-fill"></i></div>
+            <div>
+              <div class="stat-value">5</div>
+              <div class="stat-label">Subjects &ge; 75%</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple"><i class="bi bi-exclamation-circle-fill"></i></div>
+            <div>
+              <div class="stat-value">1</div>
+              <div class="stat-label">Subjects &lt; 75%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="panel-card-header">
+            <h3>Attendance By Subject</h3>
+            <div class="search-mini">
+              <i class="bi bi-search"></i>
+              <input type="text" placeholder="Search subject...">
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Subject</th>
+                <th>Total Classes</th>
+                <th>Attended Classes</th>
+                <th>Attendance</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Computer Networks</td>
+                <td>21</td>
+                <td>17</td>
+                <td class="att-good">80.95%</td>
+                <td><span class="pill green">Good</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Theory Of Automata &amp; Formal Languages</td>
+                <td>24</td>
+                <td>19</td>
+                <td class="att-ok">79.17%</td>
+                <td><span class="pill green">Good</span></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Application Build &amp; Release Automation</td>
+                <td>17</td>
+                <td>16</td>
+                <td class="att-good">94.12%</td>
+                <td><span class="pill green">Excellent</span></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Full Stack Using Scripting Technologies</td>
+                <td>26</td>
+                <td>22</td>
+                <td class="att-good">84.62%</td>
+                <td><span class="pill green">Good</span></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Competitive Programming</td>
+                <td>24</td>
+                <td>18</td>
+                <td class="att-ok">75.00%</td>
+                <td><span class="pill green">Good</span></td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Full Stack Using Scripting Technologies Lab</td>
+                <td>21</td>
+                <td>19</td>
+                <td class="att-good">90.48%</td>
+                <td><span class="pill green">Excellent</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-footnote">Attendance percentage is calculated as (Attended Classes / Total Classes) &times; 100</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
