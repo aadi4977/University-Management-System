@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Results - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <ul class="side-nav">
+      <li><a href="../dashboard/index.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a href="../attendance/index.html"><i class="bi bi-calendar-check-fill"></i>My Attendance</a></li>
+      <li><a href="index.html" class="active"><i class="bi bi-bar-chart-fill"></i>My Results</a></li>
+      <li><a href="#"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+      <li><a href="#"><i class="bi bi-cash-coin"></i>Fee Status</a></li>
+      <li><a href="#"><i class="bi bi-clock-history"></i>Timetable</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <ul class="side-nav">
+        <li><a href="../../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="main">
+    <header class="topbar">
+      <div class="topbar-search">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search for courses, notices, or anything...">
+      </div>
+      <div class="topbar-right">
+        <div class="notif-wrap">
+          <input type="checkbox" id="notif-toggle" class="notif-toggle-input">
+          <label for="notif-toggle" class="topbar-bell" aria-label="Notifications">
+            <i class="bi bi-bell-fill"></i>
+            <span class="notif-badge">1</span>
+          </label>
+          <div class="notif-panel">
+            <div class="notif-panel-header">Notifications</div>
+            <ul class="notif-list">
+            <li>
+              <i class="bi bi-journal-bookmark-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Mid-Term Examination schedule published</div>
+                <div class="notif-time">5 hours ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-cash-coin notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Fee payment reminder -- due by Oct 3</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-mortarboard-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Semester V results have been declared</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-calendar-event-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">New event: Tech Talk on Sep 28</div>
+                <div class="notif-time">2 days ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-exclamation-circle-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Attendance below 75% in Competitive Programming</div>
+                <div class="notif-time">2 days ago</div>
+              </div>
+            </li>
+            </ul>
+            <div class="notif-panel-footer">This is sample data -- not wired to anything yet.</div>
+          </div>
+        </div>
+        <div class="topbar-profile">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Abhishek Vishwakarma</div>
+            <div class="sub">Roll No. 21BCE1234</div>
+          </div>
+          <i class="bi bi-chevron-down profile-chevron"></i>
+        </div>
+      </div>
+    </header>
+
+      <div class="content">
+
+        <nav class="breadcrumb">
+          <a href="../dashboard/index.html"><i class="bi bi-house-door"></i>Dashboard</a>
+          <span class="sep">&rsaquo;</span>
+          <span class="current">My Results</span>
+        </nav>
+
+        <div class="page-header">
+          <div>
+            <h1>My Results</h1>
+            <p>Check your semester-wise results, grades and CGPA. Keep learning, keep growing!</p>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="bi bi-mortarboard-fill"></i></div>
+            <div>
+              <div class="stat-value">V</div>
+              <div class="stat-label">Semester &middot; Jul 2025 &ndash; Dec 2025</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-bar-chart-fill"></i></div>
+            <div>
+              <div class="stat-value">8.42</div>
+              <div class="stat-label">SGPA &middot; Out of 10</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple"><i class="bi bi-star-fill"></i></div>
+            <div>
+              <div class="stat-value">8.21</div>
+              <div class="stat-label">CGPA &middot; Out of 10</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <h3>Subject-wise Result</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Credits</th>
+                <th>Grade</th>
+                <th>Marks (Out of 100)</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>BCSE0501</td>
+                <td>Computer Networks</td>
+                <td>3</td>
+                <td>A</td>
+                <td>85</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>BCSE0502</td>
+                <td>Theory Of Automata &amp; Formal Languages</td>
+                <td>3</td>
+                <td>B+</td>
+                <td>78</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>BCSE0503</td>
+                <td>Application Build &amp; Release Automation</td>
+                <td>4</td>
+                <td>A+</td>
+                <td>92</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>BCSE0504</td>
+                <td>Full Stack Using Scripting Technologies</td>
+                <td>4</td>
+                <td>A</td>
+                <td>88</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>BCSE0505</td>
+                <td>Competitive Programming</td>
+                <td>3</td>
+                <td>B</td>
+                <td>75</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>BCSE0506</td>
+                <td>Full Stack Using Scripting Technologies Lab</td>
+                <td>2</td>
+                <td>A+</td>
+                <td>94</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
