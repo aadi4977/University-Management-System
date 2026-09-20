@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <ul class="side-nav">
+      <li><a href="../dashboard/index.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a href="index.html" class="active"><i class="bi bi-people-fill"></i>Students</a></li>
+      <li><a href="../manage-faculty/index.html"><i class="bi bi-person-check-fill"></i>Faculty</a></li>
+      <li><a href="../manage-courses/index.html"><i class="bi bi-journal-bookmark-fill"></i>Courses</a></li>
+      <li><a href="../fee/index.html"><i class="bi bi-cash-coin"></i>Fees</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <ul class="side-nav">
+        <li><a href="../../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="main">
+    <header class="topbar">
+      <div class="topbar-search">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search students, courses, fees...">
+      </div>
+      <div class="topbar-right">
+        <div class="notif-wrap">
+          <input type="checkbox" id="notif-toggle" class="notif-toggle-input">
+          <label for="notif-toggle" class="topbar-bell" aria-label="Notifications"><i class="bi bi-bell-fill"></i></label>
+          <div class="notif-panel">
+            <div class="notif-panel-header">Notifications</div>
+            <ul class="notif-list">
+            <li>
+              <i class="bi bi-person-plus-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">New admission application received</div>
+                <div class="notif-time">5 minutes ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-cash-coin notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Fee payment received from Aarav Sharma</div>
+                <div class="notif-time">1 hour ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-calendar-x-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Leave request from Dr. Neha Gupta</div>
+                <div class="notif-time">2 hours ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-journal-bookmark-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Mid-Term Examination schedule published</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-exclamation-circle-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Monthly report submission due in 3 days</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            </ul>
+            <div class="notif-panel-footer">This is sample data -- not wired to anything yet.</div>
+          </div>
+        </div>
+        <div class="topbar-profile">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Admin</div>
+            <div class="sub">GLA University, Mathura</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+      <div class="content">
+        <div class="page-header">
+          <div>
+            <h1>Students</h1>
+            <p>View and manage enrolled student records</p>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="bi bi-people-fill"></i></div>
+            <div>
+              <div class="stat-value">342</div>
+              <div class="stat-label">Total Students</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-check-circle-fill"></i></div>
+            <div>
+              <div class="stat-value">320</div>
+              <div class="stat-label">Active</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="bi bi-calendar-x-fill"></i></div>
+            <div>
+              <div class="stat-value">22</div>
+              <div class="stat-label">On Leave</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-search">
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="Search by name or roll no">
+        </div>
+
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Semester</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>1</td>
+              <td>2401001</td>
+              <td>Mukund Johari</td>
+              <td>B.Tech CSE (AI & DS)</td>
+              <td>5th</td>
+              <td>9876543210</td>
+              <td>mukund.johari@gla.ac.in</td>
+              <td><span class="pill green">Active</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>2401002</td>
+              <td>Aarav Sharma</td>
+              <td>B.Tech CSE</td>
+              <td>5th</td>
+              <td>9876543211</td>
+              <td>aarav.sharma@gla.ac.in</td>
+              <td><span class="pill green">Active</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>2401003</td>
+              <td>Isha Verma</td>
+              <td>B.Tech ECE</td>
+              <td>3rd</td>
+              <td>9876543212</td>
+              <td>isha.verma@gla.ac.in</td>
+              <td><span class="pill green">Active</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>2401004</td>
+              <td>Rohan Gupta</td>
+              <td>B.Tech ME</td>
+              <td>1st</td>
+              <td>9876543213</td>
+              <td>rohan.gupta@gla.ac.in</td>
+              <td><span class="pill orange">On Leave</span></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>2401005</td>
+              <td>Neha Singh</td>
+              <td>B.Tech CE</td>
+              <td>7th</td>
+              <td>9876543214</td>
+              <td>neha.singh@gla.ac.in</td>
+              <td><span class="pill green">Active</span></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>2401006</td>
+              <td>Karan Patel</td>
+              <td>BBA</td>
+              <td>5th</td>
+              <td>9876543215</td>
+              <td>karan.patel@gla.ac.in</td>
+              <td><span class="pill green">Active</span></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>2401007</td>
+              <td>Ananya Mishra</td>
+              <td>MBA</td>
+              <td>3rd</td>
+              <td>9876543216</td>
+              <td>ananya.mishra@gla.ac.in</td>
+              <td><span class="pill orange">On Leave</span></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>2401008</td>
+              <td>Priya Nair</td>
+              <td>BCA</td>
+              <td>5th</td>
+              <td>9876543217</td>
+              <td>priya.nair@gla.ac.in</td>
+              <td><span class="pill green">Active</span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

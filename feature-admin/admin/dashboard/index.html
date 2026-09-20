@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <ul class="side-nav">
+      <li><a href="index.html" class="active"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a href="../manage-students/index.html"><i class="bi bi-people-fill"></i>Students</a></li>
+      <li><a href="../manage-faculty/index.html"><i class="bi bi-person-check-fill"></i>Faculty</a></li>
+      <li><a href="../manage-courses/index.html"><i class="bi bi-journal-bookmark-fill"></i>Courses</a></li>
+      <li><a href="../fee/index.html"><i class="bi bi-cash-coin"></i>Fees</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <ul class="side-nav">
+        <li><a href="../../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="main">
+    <header class="topbar">
+      <div class="topbar-search">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search students, faculty, courses...">
+      </div>
+      <div class="topbar-right">
+        <div class="notif-wrap">
+          <input type="checkbox" id="notif-toggle" class="notif-toggle-input">
+          <label for="notif-toggle" class="topbar-bell" aria-label="Notifications"><i class="bi bi-bell-fill"></i></label>
+          <div class="notif-panel">
+            <div class="notif-panel-header">Notifications</div>
+            <ul class="notif-list">
+            <li>
+              <i class="bi bi-person-plus-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">New admission application received</div>
+                <div class="notif-time">5 minutes ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-cash-coin notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Fee payment received from Aarav Sharma</div>
+                <div class="notif-time">1 hour ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-calendar-x-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Leave request from Dr. Neha Gupta</div>
+                <div class="notif-time">2 hours ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-journal-bookmark-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Mid-Term Examination schedule published</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-exclamation-circle-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Monthly report submission due in 3 days</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            </ul>
+            <div class="notif-panel-footer">This is sample data -- not wired to anything yet.</div>
+          </div>
+        </div>
+        <div class="topbar-profile">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Admin</div>
+            <div class="sub">GLA University, Mathura</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+      <div class="content">
+        <div class="page-header">
+          <div>
+            <h1>Welcome back, Admin</h1>
+            <p>Here's what's happening at GLA University today</p>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="bi bi-mortarboard-fill"></i></div>
+            <div>
+              <div class="stat-value">342</div>
+              <div class="stat-label">Total Students</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-person-check-fill"></i></div>
+            <div>
+              <div class="stat-value">28</div>
+              <div class="stat-label">Total Faculty</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="bi bi-journal-bookmark-fill"></i></div>
+            <div>
+              <div class="stat-value">12</div>
+              <div class="stat-label">Total Courses</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple"><i class="bi bi-cash-coin"></i></div>
+            <div>
+              <div class="stat-value">Rs. 18,50,000</div>
+              <div class="stat-label">Fee Collected</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- distribution charts: plain CSS conic-gradient rings, no chart library.
+             numbers are hardcoded placeholders, same as the stat cards above --
+             swap them for real counts later. Student/Faculty totals here match
+             the "Total Students" / "Total Faculty" stat cards (342 / 28). -->
+        <div class="chart-row">
+          <div class="chart-card">
+            <h3>Student Distribution</h3>
+            <div class="chart-body">
+              <div class="donut" style="background: conic-gradient(var(--primary-light) 0% 40.94%, var(--green) 40.94% 60.82%, var(--orange) 60.82% 82.46%, var(--purple) 82.46% 92.69%, var(--teal) 92.69% 100%);">
+                <div class="donut-hole">
+                  <div class="value">342</div>
+                  <div class="label">Students</div>
+                </div>
+              </div>
+              <ul class="chart-legend">
+                <li><span class="legend-name"><span class="swatch blue"></span>CSE</span><span class="legend-value">140</span></li>
+                <li><span class="legend-name"><span class="swatch green"></span>ECE</span><span class="legend-value">68</span></li>
+                <li><span class="legend-name"><span class="swatch orange"></span>Mech &amp; Civil</span><span class="legend-value">74</span></li>
+                <li><span class="legend-name"><span class="swatch purple"></span>Management</span><span class="legend-value">35</span></li>
+                <li><span class="legend-name"><span class="swatch teal"></span>Comp. Applications</span><span class="legend-value">25</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Faculty Distribution</h3>
+            <div class="chart-body">
+              <div class="donut" style="background: conic-gradient(var(--primary-light) 0% 35.71%, var(--green) 35.71% 57.14%, var(--orange) 57.14% 78.57%, var(--purple) 78.57% 92.86%, var(--teal) 92.86% 100%);">
+                <div class="donut-hole">
+                  <div class="value">28</div>
+                  <div class="label">Faculty</div>
+                </div>
+              </div>
+              <ul class="chart-legend">
+                <li><span class="legend-name"><span class="swatch blue"></span>CSE</span><span class="legend-value">10</span></li>
+                <li><span class="legend-name"><span class="swatch green"></span>ECE</span><span class="legend-value">6</span></li>
+                <li><span class="legend-name"><span class="swatch orange"></span>Mech &amp; Civil</span><span class="legend-value">6</span></li>
+                <li><span class="legend-name"><span class="swatch purple"></span>Management</span><span class="legend-value">4</span></li>
+                <li><span class="legend-name"><span class="swatch teal"></span>Comp. Applications</span><span class="legend-value">2</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- upcoming events: hardcoded sample entries, same "static for now" pattern -->
+        <div class="events-card">
+          <h3>Upcoming Events</h3>
+          <ul class="event-list">
+            <li>
+              <div class="event-date"><div class="day">22</div><div class="mon">Sep</div></div>
+              <div class="event-info">
+                <div class="title">Mid-Term Examination</div>
+                <div class="meta">9:00 AM - 5:00 PM &middot; All Departments</div>
+              </div>
+            </li>
+            <li>
+              <div class="event-date"><div class="day">25</div><div class="mon">Sep</div></div>
+              <div class="event-info">
+                <div class="title">Faculty Meeting</div>
+                <div class="meta">11:00 AM - 12:00 PM &middot; Conference Hall</div>
+              </div>
+            </li>
+            <li>
+              <div class="event-date"><div class="day">28</div><div class="mon">Sep</div></div>
+              <div class="event-info">
+                <div class="title">Admission Review</div>
+                <div class="meta">10:00 AM - 1:00 PM &middot; Admin Block</div>
+              </div>
+            </li>
+            <li>
+              <div class="event-date"><div class="day">30</div><div class="mon">Sep</div></div>
+              <div class="event-info">
+                <div class="title">Monthly Report Submission</div>
+                <div class="meta">5:00 PM &middot; Online</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
