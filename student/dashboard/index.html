@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <ul class="side-nav">
+      <li><a href="index.html" class="active"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a href="../attendance/index.html"><i class="bi bi-calendar-check-fill"></i>My Attendance</a></li>
+      <li><a href="../result/index.html"><i class="bi bi-bar-chart-fill"></i>My Results</a></li>
+      <li><a href="#"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+      <li><a href="#"><i class="bi bi-cash-coin"></i>Fee Status</a></li>
+      <li><a href="#"><i class="bi bi-clock-history"></i>Timetable</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <ul class="side-nav">
+        <li><a href="../../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="main">
+    <header class="topbar">
+      <div class="topbar-search">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search for courses, notices, or anything...">
+      </div>
+      <div class="topbar-right">
+        <div class="notif-wrap">
+          <input type="checkbox" id="notif-toggle" class="notif-toggle-input">
+          <label for="notif-toggle" class="topbar-bell" aria-label="Notifications">
+            <i class="bi bi-bell-fill"></i>
+            <span class="notif-badge">1</span>
+          </label>
+          <div class="notif-panel">
+            <div class="notif-panel-header">Notifications</div>
+            <ul class="notif-list">
+            <li>
+              <i class="bi bi-journal-bookmark-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Mid-Term Examination schedule published</div>
+                <div class="notif-time">5 hours ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-cash-coin notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Fee payment reminder -- due by Oct 3</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-mortarboard-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Semester V results have been declared</div>
+                <div class="notif-time">Yesterday</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-calendar-event-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">New event: Tech Talk on Sep 28</div>
+                <div class="notif-time">2 days ago</div>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-exclamation-circle-fill notif-icon"></i>
+              <div class="notif-body">
+                <div class="notif-text">Attendance below 75% in Competitive Programming</div>
+                <div class="notif-time">2 days ago</div>
+              </div>
+            </li>
+            </ul>
+            <div class="notif-panel-footer">This is sample data -- not wired to anything yet.</div>
+          </div>
+        </div>
+        <div class="topbar-profile">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Abhishek Vishwakarma</div>
+            <div class="sub">Roll No. 21BCE1234</div>
+          </div>
+          <i class="bi bi-chevron-down profile-chevron"></i>
+        </div>
+      </div>
+    </header>
+
+      <div class="content">
+
+        <section class="welcome-banner">
+          <div class="welcome-text">
+            <p class="greeting">Good Morning,</p>
+            <h1>Abhishek Vishwakarma <span>&#128075;</span></h1>
+            <p class="sub">Stay consistent, keep learning, and make it count!</p>
+          </div>
+          <blockquote class="welcome-quote">
+            &ldquo;Discipline today builds the freedom tomorrow.&rdquo;
+            <cite>&mdash; GLA University</cite>
+          </blockquote>
+        </section>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-people-fill"></i></div>
+            <div>
+              <div class="stat-value">78%</div>
+              <div class="stat-label">Attendance</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="bi bi-mortarboard-fill"></i></div>
+            <div>
+              <div class="stat-value">8.21</div>
+              <div class="stat-label">CGPA</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple"><i class="bi bi-currency-rupee"></i></div>
+            <div>
+              <div class="stat-value">&#8377;0</div>
+              <div class="stat-label">Fees Due</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+
+          <div class="panel-card">
+            <h3>Attendance By Subject <i class="bi bi-info-circle" title="Attendance percentage is calculated as (Attended Classes / Total Classes) x 100"></i></h3>
+            <table class="mini-table">
+              <tbody>
+                <tr><td>Computer Networks</td><td class="value att-good">80.95%</td></tr>
+                <tr><td>Theory Of Automata &amp; Formal Languages</td><td class="value att-ok">79.17%</td></tr>
+                <tr><td>Application Build &amp; Release Automation</td><td class="value att-good">94.12%</td></tr>
+                <tr><td>Full Stack Using Scripting Technologies</td><td class="value att-good">84.62%</td></tr>
+                <tr><td>Competitive Programming</td><td class="value att-ok">75.00%</td></tr>
+                <tr><td>Full Stack Using Scripting Technologies Lab</td><td class="value att-good">90.48%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <h3>Today's Classes</h3>
+              <span class="panel-date">Sat, 20 Sep 2025</span>
+            </div>
+            <ul class="classes-list">
+              <li>
+                <div class="class-time">10:00 AM<br>11:00 AM</div>
+                <div class="class-info">
+                  <div class="title">Cloud Computing</div>
+                  <div class="meta"><i class="bi bi-geo-alt"></i>B-204</div>
+                </div>
+              </li>
+              <li>
+                <div class="class-time">11:00 AM<br>12:00 PM</div>
+                <div class="class-info">
+                  <div class="title">Computer Networks</div>
+                  <div class="meta"><i class="bi bi-geo-alt"></i>B-204</div>
+                </div>
+              </li>
+              <li>
+                <div class="class-time">1:00 PM<br>2:00 PM</div>
+                <div class="class-info">
+                  <div class="title">Database Management Systems</div>
+                  <div class="meta"><i class="bi bi-geo-alt"></i>B-301</div>
+                </div>
+              </li>
+              <li>
+                <div class="class-time">2:00 PM<br>3:00 PM</div>
+                <div class="class-info">
+                  <div class="title">Professional Ethics</div>
+                  <div class="meta"><i class="bi bi-geo-alt"></i>C-105</div>
+                </div>
+              </li>
+              <li>
+                <div class="class-time">4:00 PM<br>5:00 PM</div>
+                <div class="class-info">
+                  <div class="title">Open Elective (AI)</div>
+                  <div class="meta"><i class="bi bi-geo-alt"></i>B-402</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <h3>Upcoming Events / Exams</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <ul class="event-list">
+              <li>
+                <div class="event-date"><div class="day">22</div><div class="mon">Sep</div></div>
+                <div class="event-info">
+                  <div class="title">Mid Term Exam &ndash; DBMS</div>
+                  <div class="meta">10:00 AM &ndash; 12:00 PM &middot; Examination Hall 1</div>
+                </div>
+              </li>
+              <li>
+                <div class="event-date"><div class="day">25</div><div class="mon">Sep</div></div>
+                <div class="event-info">
+                  <div class="title">Assignment 4 Submission</div>
+                  <div class="meta">11:59 PM</div>
+                </div>
+              </li>
+              <li>
+                <div class="event-date"><div class="day">28</div><div class="mon">Sep</div></div>
+                <div class="event-info">
+                  <div class="title">Club Event &ndash; Tech Talk</div>
+                  <div class="meta">2:00 PM &ndash; 4:00 PM &middot; Auditorium</div>
+                </div>
+              </li>
+              <li>
+                <div class="event-date"><div class="day">03</div><div class="mon">Oct</div></div>
+                <div class="event-info">
+                  <div class="title">Last Date for Fee Payment</div>
+                  <div class="meta">Till 11:59 PM</div>
+                </div>
+              </li>
+              <li>
+                <div class="event-date"><div class="day">08</div><div class="mon">Oct</div></div>
+                <div class="event-info">
+                  <div class="title">Mid Term Exam &ndash; Computer Networks</div>
+                  <div class="meta">10:00 AM &ndash; 12:00 PM &middot; Examination Hall 2</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
