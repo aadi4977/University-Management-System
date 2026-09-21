@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - GLA UMS</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+
+      <div class="login-illustration">
+        <img src="login-illustration.png" alt="Student studying illustration">
+      </div>
+
+      <div class="login-box">
+        <div class="brand">
+          <img src="logo.png" alt="GLA UMS logo" class="brand-logo">
+          <div>
+            <div class="university">GLA University, Mathura</div>
+            <h2>University Management System</h2>
+          </div>
+        </div>
+
+        <form class="login-form" id="loginForm">
+          <label for="role">Login as</label>
+          <select id="role" name="role">
+            <option value="admin">Administrator</option>
+            <option value="faculty">Faculty</option>
+            <option value="student">Student</option>
+          </select>
+
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter password" required>
+
+          <button type="submit">Login</button>
+          <p class="error-msg" id="loginError"></p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
