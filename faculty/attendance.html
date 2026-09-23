@@ -683,7 +683,7 @@
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Interactive Script -->
+    <!-- Interactive Script -->
   <script>
     function showToast(message, type = 'success') {
       const container = document.getElementById('toastContainer');
@@ -821,8 +821,20 @@
       showToast('Attendance report exported to CSV');
     });
 
+    // Deep link query parameters from Dashboard
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('course')) {
+      const c = urlParams.get('course');
+      const sel = document.getElementById('courseSelect');
+      if ([...sel.options].some(o => o.value === c)) sel.value = c;
+    }
+    if (urlParams.has('sec')) {
+      const s = urlParams.get('sec');
+      const sel = document.getElementById('sectionSelect');
+      if ([...sel.options].some(o => o.value === s)) sel.value = s;
+    }
+
     recalculateAttendance();
   </script>
-
 </body>
 </html>
