@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Attendance - GLA UMS</title>
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Shared Theme CSS -->
+  <link rel="stylesheet" href="faculty.css">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <img src="logo.png" alt="GLA UMS logo">
+        <div>
+          <div class="name">GLA UMS</div>
+          <div class="tagline">Faculty Portal</div>
+        </div>
+      </div>
+
+      <ul class="side-nav">
+        <li><a href="dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+        <li><a href="attendance.html" class="active"><i class="bi bi-calendar-check-fill"></i>Attendance</a></li>
+        <li><a href="results.html"><i class="bi bi-bar-chart-fill"></i>Results</a></li>
+        <li><a href="dashboard.html#courses"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+        <li><a href="dashboard.html#schedule"><i class="bi bi-clock-history"></i>Schedule</a></li>
+        <li><a href="dashboard.html#notices"><i class="bi bi-bell-fill"></i>Notices</a></li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <ul class="side-nav">
+          <li><a href="../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-search">
+          <i class="bi bi-search"></i>
+          <input type="text" id="topSearch" placeholder="Search student name or roll number...">
+        </div>
+
+        <div class="topbar-right">
+          <!-- Notification Dropdown -->
+          <div class="notif-wrap">
+            <input type="checkbox" id="notif-toggle" class="notif-toggle-input">
+            <label for="notif-toggle" class="topbar-bell" aria-label="Notifications">
+              <i class="bi bi-bell-fill"></i>
+              <span class="notif-badge">3</span>
+            </label>
+            <div class="notif-panel">
+              <div class="notif-panel-header">Attendance Notifications</div>
+              <ul class="notif-list">
+                <li>
+                  <i class="bi bi-exclamation-circle-fill notif-icon" style="color: var(--orange);"></i>
+                  <div class="notif-body">
+                    <div class="notif-text">4 students in Section 3B have attendance below 75%</div>
+                    <div class="notif-time">1 hour ago</div>
+                  </div>
+                </li>
+                <li>
+                  <i class="bi bi-check2-circle notif-icon" style="color: var(--green);"></i>
+                  <div class="notif-body">
+                    <div class="notif-text">Previous lecture attendance synced successfully</div>
+                    <div class="notif-time">Yesterday</div>
+                  </div>
+                </li>
+              </ul>
+              <div class="notif-panel-footer">GLA University Attendance Portal</div>
+            </div>
+          </div>
+
+          <!-- Topbar Profile -->
+          <div class="topbar-profile">
+            <div class="avatar">YS</div>
+            <div>
+              <div class="name">Mr. Yash Singh</div>
+              <div class="sub">Assistant Professor &bull; CEA</div>
+            </div>
+            <i class="bi bi-chevron-down profile-chevron"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="content">
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+          <a href="dashboard.html"><i class="bi bi-house-door"></i> Home</a>
+          <span class="sep">/</span>
+          <span class="current">Attendance Register</span>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <div>
+            <h1>Attendance Register</h1>
+            <p>Record daily and lecture-slot attendance, monitor percentage thresholds, and export class records.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-outline" onclick="window.print()"><i class="bi bi-printer"></i> Print</button>
+            <button class="btn btn-outline-primary" id="exportCsvBtn"><i class="bi bi-file-earmark-spreadsheet"></i> Export CSV</button>
+            <button class="btn btn-success" id="saveTopBtn"><i class="bi bi-check2-all"></i> Save Attendance</button>
+          </div>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="filter-card">
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label for="courseSelect">Course / Subject</label>
+              <select id="courseSelect">
+                <option value="BCS-503" selected>BCS-503: Full Stack Using Scripting Technologies</option>
+                <option value="BCS-501">BCS-501: Computer Networks</option>
+                <option value="BCS-502">BCS-502: Theory of Automata &amp; Formal Languages</option>
+                <option value="BCS-504">BCS-504: Build &amp; Release Automation Lab</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="sectionSelect">Section / Batch</label>
+              <select id="sectionSelect">
+                <option value="Sec 3B" selected>Section 3B (B.Tech CSE Sem 5)</option>
+                <option value="Sec 3A">Section 3A (B.Tech CSE Sem 5)</option>
+                <option value="Sec 3C">Section 3C (B.Tech CSE Sem 5)</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="dateSelect">Lecture Date</label>
+              <input type="date" id="dateSelect" value="2026-09-23">
+            </div>
+
+            <div class="filter-group">
+              <label for="slotSelect">Time Slot</label>
+              <select id="slotSelect">
+                <option value="09:00 - 10:00 AM">09:00 AM &ndash; 10:00 AM (Lecture)</option>
+                <option value="11:00 - 12:00 PM" selected>11:00 AM &ndash; 12:00 PM (Lecture)</option>
+                <option value="01:00 - 02:00 PM">01:00 PM &ndash; 02:00 PM (Lecture)</option>
+                <option value="03:30 - 05:00 PM">03:30 PM &ndash; 05:00 PM (Lab)</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" id="loadFilterBtn" style="height: 38px;">
+              <i class="bi bi-funnel-fill"></i> Filter
+            </button>
+          </div>
+        </div>
+
+        <!-- Controls & Metrics Bar -->
+        <div class="control-bar">
+          <div class="control-stats">
+            <span class="control-stat-pill">Total: <strong id="totalCount">15</strong></span>
+            <span class="control-stat-pill present"><i class="bi bi-check-circle-fill"></i> Present: <strong id="presentCount">13</strong></span>
+            <span class="control-stat-pill absent"><i class="bi bi-x-circle-fill"></i> Absent: <strong id="absentCount">1</strong></span>
+            <span class="control-stat-pill late"><i class="bi bi-clock-fill"></i> Late/Excused: <strong id="lateCount">1</strong></span>
+            <span class="control-stat-pill rate"><i class="bi bi-pie-chart-fill"></i> Class Rate: <strong id="ratePercent">86.7%</strong></span>
+          </div>
+
+          <div class="control-actions">
+            <div class="table-search" style="margin-bottom: 0; min-width: 220px;">
+              <i class="bi bi-search"></i>
+              <input type="text" id="tableFilterInput" placeholder="Filter student list...">
+            </div>
+            <button class="btn btn-outline btn-sm" id="markAllPresentBtn"><i class="bi bi-check-all text-success"></i> All Present</button>
+            <button class="btn btn-outline btn-sm" id="markAllAbsentBtn"><i class="bi bi-x text-danger"></i> All Absent</button>
+            <button class="btn btn-outline btn-sm" id="filterDefaultersBtn"><i class="bi bi-exclamation-triangle text-warning"></i> &lt; 75% Only</button>
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="table-card">
+          <table id="attendanceTable">
+            <thead>
+              <tr>
+                <th style="width: 45px;">#</th>
+                <th>Student Name</th>
+                <th>University Roll No</th>
+                <th>Branch &amp; Semester</th>
+                <th>Cumulative Attd.</th>
+                <th>Mark Status</th>
+                <th>Remarks</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceTableBody">
+
+              <!-- Student 1 -->
+              <tr data-roll="2415000001" data-name="Aadi Gupta" data-cum="88.5">
+                <td>1</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">AG</div>
+                    <div class="student-info">
+                      <div class="student-name">Aadi Gupta</div>
+                      <div class="student-roll">GLA-2415000001</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000001</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">88.5%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 88.5%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_1" id="att_1_p" value="P" checked><label for="att_1_p">P</label>
+                    <input type="radio" name="att_1" id="att_1_a" value="A"><label for="att_1_a">A</label>
+                    <input type="radio" name="att_1" id="att_1_l" value="L"><label for="att_1_l">L</label>
+                    <input type="radio" name="att_1" id="att_1_m" value="M"><label for="att_1_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 2 -->
+              <tr data-roll="2415000028" data-name="Abhimanyu Sharma" data-cum="92.0">
+                <td>2</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #2563eb;">AS</div>
+                    <div class="student-info">
+                      <div class="student-name">Abhimanyu Sharma</div>
+                      <div class="student-roll">GLA-2415000028</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000028</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">92.0%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 92%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_2" id="att_2_p" value="P" checked><label for="att_2_p">P</label>
+                    <input type="radio" name="att_2" id="att_2_a" value="A"><label for="att_2_a">A</label>
+                    <input type="radio" name="att_2" id="att_2_l" value="L"><label for="att_2_l">L</label>
+                    <input type="radio" name="att_2" id="att_2_m" value="M"><label for="att_2_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 3 -->
+              <tr data-roll="2415000064" data-name="Abhishek Vishwakarma" data-cum="84.6">
+                <td>3</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #f59e0b;">AV</div>
+                    <div class="student-info">
+                      <div class="student-name">Abhishek Vishwakarma</div>
+                      <div class="student-roll">GLA-2415000064</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000064</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">84.6%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 84.6%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_3" id="att_3_p" value="P" checked><label for="att_3_p">P</label>
+                    <input type="radio" name="att_3" id="att_3_a" value="A"><label for="att_3_a">A</label>
+                    <input type="radio" name="att_3" id="att_3_l" value="L"><label for="att_3_l">L</label>
+                    <input type="radio" name="att_3" id="att_3_m" value="M"><label for="att_3_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 4 -->
+              <tr data-roll="2415000089" data-name="Aditya Gupta" data-cum="81.2">
+                <td>4</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #7c3aed;">AG</div>
+                    <div class="student-info">
+                      <div class="student-name">Aditya Gupta</div>
+                      <div class="student-roll">GLA-2415000089</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000089</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">81.2%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 81.2%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_4" id="att_4_p" value="P" checked><label for="att_4_p">P</label>
+                    <input type="radio" name="att_4" id="att_4_a" value="A"><label for="att_4_a">A</label>
+                    <input type="radio" name="att_4" id="att_4_l" value="L"><label for="att_4_l">L</label>
+                    <input type="radio" name="att_4" id="att_4_m" value="M"><label for="att_4_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 5 (Shortfall) -->
+              <tr data-roll="2415000102" data-name="Ananya Verma" data-cum="68.4">
+                <td>5</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #dc2626;">AV</div>
+                    <div class="student-info">
+                      <div class="student-name">Ananya Verma</div>
+                      <div class="student-roll">GLA-2415000102</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000102</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill red">68.4%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar alert" style="width: 68.4%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_5" id="att_5_p" value="P"><label for="att_5_p">P</label>
+                    <input type="radio" name="att_5" id="att_5_a" value="A" checked><label for="att_5_a">A</label>
+                    <input type="radio" name="att_5" id="att_5_l" value="L"><label for="att_5_l">L</label>
+                    <input type="radio" name="att_5" id="att_5_m" value="M"><label for="att_5_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" value="Uninformed Absence"></td>
+              </tr>
+
+              <!-- Student 6 -->
+              <tr data-roll="2415000115" data-name="Karan Johal" data-cum="79.0">
+                <td>6</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">KJ</div>
+                    <div class="student-info">
+                      <div class="student-name">Karan Johal</div>
+                      <div class="student-roll">GLA-2415000115</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000115</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill orange">79.0%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar warn" style="width: 79%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_6" id="att_6_p" value="P" checked><label for="att_6_p">P</label>
+                    <input type="radio" name="att_6" id="att_6_a" value="A"><label for="att_6_a">A</label>
+                    <input type="radio" name="att_6" id="att_6_l" value="L"><label for="att_6_l">L</label>
+                    <input type="radio" name="att_6" id="att_6_m" value="M"><label for="att_6_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 7 -->
+              <tr data-roll="2415000134" data-name="Mehul Chawla" data-cum="75.0">
+                <td>7</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #f59e0b;">MC</div>
+                    <div class="student-info">
+                      <div class="student-name">Mehul Chawla</div>
+                      <div class="student-roll">GLA-2415000134</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000134</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill orange">75.0%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar warn" style="width: 75%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_7" id="att_7_p" value="P"><label for="att_7_p">P</label>
+                    <input type="radio" name="att_7" id="att_7_a" value="A"><label for="att_7_a">A</label>
+                    <input type="radio" name="att_7" id="att_7_l" value="L" checked><label for="att_7_l">L</label>
+                    <input type="radio" name="att_7" id="att_7_m" value="M"><label for="att_7_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" value="Late by 10m"></td>
+              </tr>
+
+              <!-- Student 8 -->
+              <tr data-roll="2415000148" data-name="Pooja Tripathi" data-cum="94.1">
+                <td>8</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #16a34a;">PT</div>
+                    <div class="student-info">
+                      <div class="student-name">Pooja Tripathi</div>
+                      <div class="student-roll">GLA-2415000148</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000148</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">94.1%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 94.1%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_8" id="att_8_p" value="P" checked><label for="att_8_p">P</label>
+                    <input type="radio" name="att_8" id="att_8_a" value="A"><label for="att_8_a">A</label>
+                    <input type="radio" name="att_8" id="att_8_l" value="L"><label for="att_8_l">L</label>
+                    <input type="radio" name="att_8" id="att_8_m" value="M"><label for="att_8_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 9 -->
+              <tr data-roll="2415000162" data-name="Rohan Mehta" data-cum="89.2">
+                <td>9</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">RM</div>
+                    <div class="student-info">
+                      <div class="student-name">Rohan Mehta</div>
+                      <div class="student-roll">GLA-2415000162</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000162</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">89.2%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 89.2%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_9" id="att_9_p" value="P" checked><label for="att_9_p">P</label>
+                    <input type="radio" name="att_9" id="att_9_a" value="A"><label for="att_9_a">A</label>
+                    <input type="radio" name="att_9" id="att_9_l" value="L"><label for="att_9_l">L</label>
+                    <input type="radio" name="att_9" id="att_9_m" value="M"><label for="att_9_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 10 (Medical) -->
+              <tr data-roll="2415000177" data-name="Sneha Patel" data-cum="72.0">
+                <td>10</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #0891b2;">SP</div>
+                    <div class="student-info">
+                      <div class="student-name">Sneha Patel</div>
+                      <div class="student-roll">GLA-2415000177</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000177</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill red">72.0%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar alert" style="width: 72%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_10" id="att_10_p" value="P"><label for="att_10_p">P</label>
+                    <input type="radio" name="att_10" id="att_10_a" value="A"><label for="att_10_a">A</label>
+                    <input type="radio" name="att_10" id="att_10_l" value="L"><label for="att_10_l">L</label>
+                    <input type="radio" name="att_10" id="att_10_m" value="M" checked><label for="att_10_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" value="Medical Leave submitted"></td>
+              </tr>
+
+              <!-- Student 11 -->
+              <tr data-roll="2415000189" data-name="Tanmay Sen" data-cum="96.0">
+                <td>11</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">TS</div>
+                    <div class="student-info">
+                      <div class="student-name">Tanmay Sen</div>
+                      <div class="student-roll">GLA-2415000189</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000189</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">96.0%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 96%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_11" id="att_11_p" value="P" checked><label for="att_11_p">P</label>
+                    <input type="radio" name="att_11" id="att_11_a" value="A"><label for="att_11_a">A</label>
+                    <input type="radio" name="att_11" id="att_11_l" value="L"><label for="att_11_l">L</label>
+                    <input type="radio" name="att_11" id="att_11_m" value="M"><label for="att_11_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 12 -->
+              <tr data-roll="2415000201" data-name="Utkarsh Rawat" data-cum="87.5">
+                <td>12</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">UR</div>
+                    <div class="student-info">
+                      <div class="student-name">Utkarsh Rawat</div>
+                      <div class="student-roll">GLA-2415000201</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000201</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">87.5%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 87.5%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_12" id="att_12_p" value="P" checked><label for="att_12_p">P</label>
+                    <input type="radio" name="att_12" id="att_12_a" value="A"><label for="att_12_a">A</label>
+                    <input type="radio" name="att_12" id="att_12_l" value="L"><label for="att_12_l">L</label>
+                    <input type="radio" name="att_12" id="att_12_m" value="M"><label for="att_12_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 13 -->
+              <tr data-roll="2415000215" data-name="Vartika Kashyap" data-cum="83.3">
+                <td>13</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #db2777;">VK</div>
+                    <div class="student-info">
+                      <div class="student-name">Vartika Kashyap</div>
+                      <div class="student-roll">GLA-2415000215</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000215</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">83.3%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 83.3%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_13" id="att_13_p" value="P" checked><label for="att_13_p">P</label>
+                    <input type="radio" name="att_13" id="att_13_a" value="A"><label for="att_13_a">A</label>
+                    <input type="radio" name="att_13" id="att_13_l" value="L"><label for="att_13_l">L</label>
+                    <input type="radio" name="att_13" id="att_13_m" value="M"><label for="att_13_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 14 -->
+              <tr data-roll="2415000228" data-name="Yashvardhan Jain" data-cum="90.5">
+                <td>14</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">YJ</div>
+                    <div class="student-info">
+                      <div class="student-name">Yashvardhan Jain</div>
+                      <div class="student-roll">GLA-2415000228</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000228</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">90.5%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 90.5%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_14" id="att_14_p" value="P" checked><label for="att_14_p">P</label>
+                    <input type="radio" name="att_14" id="att_14_a" value="A"><label for="att_14_a">A</label>
+                    <input type="radio" name="att_14" id="att_14_l" value="L"><label for="att_14_l">L</label>
+                    <input type="radio" name="att_14" id="att_14_m" value="M"><label for="att_14_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+              <!-- Student 15 -->
+              <tr data-roll="2415000240" data-name="Zoya Fatima" data-cum="91.0">
+                <td>15</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #0284c7;">ZF</div>
+                    <div class="student-info">
+                      <div class="student-name">Zoya Fatima</div>
+                      <div class="student-roll">GLA-2415000240</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000240</strong></td>
+                <td>B.Tech CSE &bull; Sem 5</td>
+                <td>
+                  <div>
+                    <span class="pill green">91.0%</span>
+                    <div class="progress-mini"><div class="progress-mini-bar high" style="width: 91%;"></div></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="attendance-pills">
+                    <input type="radio" name="att_15" id="att_15_p" value="P" checked><label for="att_15_p">P</label>
+                    <input type="radio" name="att_15" id="att_15_a" value="A"><label for="att_15_a">A</label>
+                    <input type="radio" name="att_15" id="att_15_l" value="L"><label for="att_15_l">L</label>
+                    <input type="radio" name="att_15" id="att_15_m" value="M"><label for="att_15_m">M</label>
+                  </div>
+                </td>
+                <td><input type="text" class="remarks-input" placeholder="Optional remark..."></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Footer Actions -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 14px;">
+          <div style="font-size: 0.84rem; color: var(--text-muted);">
+            Attendance records sync directly to GLA University academic ERP.
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
+            <button class="btn btn-success" id="saveBottomBtn"><i class="bi bi-cloud-arrow-up-fill"></i> Save Attendance</button>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Interactive Script -->
+  <script>
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      const icon = type === 'success' ? 'bi-check-circle-fill' : 'bi-info-circle-fill';
+      toast.innerHTML = `<i class="bi ${icon}"></i> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 50);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 250);
+      }, 3200);
+    }
+
+    function recalculateAttendance() {
+      const rows = document.querySelectorAll('#attendanceTableBody tr');
+      let total = 0, present = 0, absent = 0, late = 0;
+
+      rows.forEach(row => {
+        if (row.style.display !== 'none') {
+          total++;
+          const selected = row.querySelector('input[type="radio"]:checked');
+          if (selected) {
+            const val = selected.value;
+            if (val === 'P') present++;
+            else if (val === 'A') absent++;
+            else if (val === 'L' || val === 'M') late++;
+          }
+        }
+      });
+
+      document.getElementById('totalCount').textContent = total;
+      document.getElementById('presentCount').textContent = present;
+      document.getElementById('absentCount').textContent = absent;
+      document.getElementById('lateCount').textContent = late;
+      const rate = total > 0 ? ((present / total) * 100).toFixed(1) : 0;
+      document.getElementById('ratePercent').textContent = rate + '%';
+    }
+
+    document.querySelectorAll('#attendanceTableBody input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', recalculateAttendance);
+    });
+
+    document.getElementById('markAllPresentBtn').addEventListener('click', () => {
+      document.querySelectorAll('#attendanceTableBody tr').forEach(row => {
+        if (row.style.display !== 'none') {
+          const radio = row.querySelector('input[value="P"]');
+          if (radio) radio.checked = true;
+        }
+      });
+      recalculateAttendance();
+      showToast('All visible students marked Present');
+    });
+
+    document.getElementById('markAllAbsentBtn').addEventListener('click', () => {
+      document.querySelectorAll('#attendanceTableBody tr').forEach(row => {
+        if (row.style.display !== 'none') {
+          const radio = row.querySelector('input[value="A"]');
+          if (radio) radio.checked = true;
+        }
+      });
+      recalculateAttendance();
+      showToast('All visible students marked Absent', 'info');
+    });
+
+    let defaulterOnly = false;
+    document.getElementById('filterDefaultersBtn').addEventListener('click', function() {
+      defaulterOnly = !defaulterOnly;
+      this.classList.toggle('btn-primary', defaulterOnly);
+      this.classList.toggle('btn-outline', !defaulterOnly);
+
+      const rows = document.querySelectorAll('#attendanceTableBody tr');
+      rows.forEach(row => {
+        const cum = parseFloat(row.getAttribute('data-cum') || '100');
+        row.style.display = defaulterOnly ? (cum < 75 ? '' : 'none') : '';
+      });
+      recalculateAttendance();
+    });
+
+    function filterTable(term) {
+      term = term.toLowerCase().trim();
+      const rows = document.querySelectorAll('#attendanceTableBody tr');
+      rows.forEach(row => {
+        const name = (row.getAttribute('data-name') || '').toLowerCase();
+        const roll = (row.getAttribute('data-roll') || '').toLowerCase();
+        row.style.display = (name.includes(term) || roll.includes(term)) ? '' : 'none';
+      });
+      recalculateAttendance();
+    }
+
+    document.getElementById('tableFilterInput').addEventListener('input', e => filterTable(e.target.value));
+    const topSearch = document.getElementById('topSearch');
+    if (topSearch) {
+      topSearch.addEventListener('input', e => {
+        filterTable(e.target.value);
+        document.getElementById('tableFilterInput').value = e.target.value;
+      });
+    }
+
+    function saveAttendance() {
+      const course = document.getElementById('courseSelect').value;
+      const date = document.getElementById('dateSelect').value;
+      showToast(`Attendance for ${course} on ${date} saved successfully!`);
+    }
+
+    document.getElementById('saveTopBtn').addEventListener('click', saveAttendance);
+    document.getElementById('saveBottomBtn').addEventListener('click', saveAttendance);
+
+    document.getElementById('exportCsvBtn').addEventListener('click', () => {
+      const rows = document.querySelectorAll('#attendanceTableBody tr');
+      let csv = 'S.No,Roll Number,Student Name,Cumulative %,Status,Remarks\n';
+      let index = 1;
+
+      rows.forEach(row => {
+        if (row.style.display !== 'none') {
+          const roll = row.getAttribute('data-roll');
+          const name = row.getAttribute('data-name');
+          const cum = row.getAttribute('data-cum') + '%';
+          const status = row.querySelector('input[type="radio"]:checked')?.value || 'P';
+          const remark = row.querySelector('.remarks-input')?.value || '';
+          csv += `"${index}","${roll}","${name}","${cum}","${status}","${remark}"\n`;
+          index++;
+        }
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Attendance_${document.getElementById('courseSelect').value}_${document.getElementById('dateSelect').value}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('Attendance report exported to CSV');
+    });
+
+    recalculateAttendance();
+  </script>
+
+</body>
+</html>
