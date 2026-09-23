@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Results - GLA UMS</title>
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Shared Theme CSS -->
+  <link rel="stylesheet" href="faculty.css">
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <img src="logo.png" alt="GLA UMS logo">
+        <div>
+          <div class="name">GLA UMS</div>
+          <div class="tagline">Faculty Portal</div>
+        </div>
+      </div>
+
+      <ul class="side-nav">
+        <li><a href="dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+        <li><a href="attendance.html"><i class="bi bi-calendar-check-fill"></i>Attendance</a></li>
+        <li><a href="results.html" class="active"><i class="bi bi-bar-chart-fill"></i>Results</a></li>
+        <li><a href="dashboard.html#courses"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+        <li><a href="dashboard.html#schedule"><i class="bi bi-clock-history"></i>Schedule</a></li>
+        <li><a href="dashboard.html#notices"><i class="bi bi-bell-fill"></i>Notices</a></li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <ul class="side-nav">
+          <li><a href="../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar-search">
+          <i class="bi bi-search"></i>
+          <input type="text" id="topSearch" placeholder="Search student name or roll number...">
+        </div>
+
+        <div class="topbar-right">
+          <!-- Notification Dropdown -->
+          <div class="notif-wrap">
+            <input type="checkbox" id="notif-toggle" class="notif-toggle-input">
+            <label for="notif-toggle" class="topbar-bell" aria-label="Notifications">
+              <i class="bi bi-bell-fill"></i>
+              <span class="notif-badge">3</span>
+            </label>
+            <div class="notif-panel">
+              <div class="notif-panel-header">Examination Notifications</div>
+              <ul class="notif-list">
+                <li>
+                  <i class="bi bi-file-earmark-check notif-icon"></i>
+                  <div class="notif-body">
+                    <div class="notif-text">Mid-Term assessment marks window closes on Oct 5</div>
+                    <div class="notif-time">2 hours ago</div>
+                  </div>
+                </li>
+                <li>
+                  <i class="bi bi-check-circle-fill notif-icon" style="color: var(--green);"></i>
+                  <div class="notif-body">
+                    <div class="notif-text">Practical lab rubric approved by Examination Cell</div>
+                    <div class="notif-time">1 day ago</div>
+                  </div>
+                </li>
+              </ul>
+              <div class="notif-panel-footer">GLA University Examination Cell</div>
+            </div>
+          </div>
+
+          <!-- Topbar Profile -->
+          <div class="topbar-profile">
+            <div class="avatar">YS</div>
+            <div>
+              <div class="name">Mr. Yash Singh</div>
+              <div class="sub">Assistant Professor &bull; CEA</div>
+            </div>
+            <i class="bi bi-chevron-down profile-chevron"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="content">
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+          <a href="dashboard.html"><i class="bi bi-house-door"></i> Home</a>
+          <span class="sep">/</span>
+          <span class="current">Examination &amp; Results</span>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <div>
+            <h1>Examination &amp; Gradebook Management</h1>
+            <p>Upload, calculate, and publish student assessment marks, midterm scores, and semester grades.</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-outline" onclick="window.print()"><i class="bi bi-printer"></i> Print</button>
+            <button class="btn btn-outline-primary" id="exportGradebookBtn"><i class="bi bi-file-earmark-arrow-down"></i> Export CSV</button>
+            <button class="btn btn-primary" id="publishModalBtn"><i class="bi bi-send-check"></i> Publish to Portal</button>
+            <button class="btn btn-success" id="saveGradesTopBtn"><i class="bi bi-cloud-arrow-up"></i> Save Marks</button>
+          </div>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="filter-card">
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label for="resultCourseSelect">Course / Subject</label>
+              <select id="resultCourseSelect">
+                <option value="BCS-503" selected>BCS-503: Full Stack Using Scripting Technologies</option>
+                <option value="BCS-501">BCS-501: Computer Networks</option>
+                <option value="BCS-502">BCS-502: Theory of Automata &amp; Formal Languages</option>
+                <option value="BCS-504">BCS-504: Build &amp; Release Automation Lab</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="examTypeSelect">Assessment Type</label>
+              <select id="examTypeSelect">
+                <option value="Mid-Term" selected>Mid-Term Exam (Max 50: Written 30 + Internal 20)</option>
+                <option value="Internal-CA">Internal Continuous Assessment (Max 25)</option>
+                <option value="Lab-Exam">Practical Lab &amp; Mini-Project Viva (Max 50)</option>
+                <option value="End-Term">End-Term Theory Examination (Max 100)</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="resultSectionSelect">Section / Batch</label>
+              <select id="resultSectionSelect">
+                <option value="Sec 3B" selected>Section 3B (B.Tech CSE Sem 5)</option>
+                <option value="Sec 3A">Section 3A (B.Tech CSE Sem 5)</option>
+                <option value="Sec 3C">Section 3C (B.Tech CSE Sem 5)</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="gradingScaleSelect">Grading Scale</label>
+              <select id="gradingScaleSelect">
+                <option value="10-point">GLA 10-Point Relative Grading (UGC)</option>
+                <option value="absolute">Absolute Percentage Scale</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" id="applyResultFilterBtn" style="height: 38px;">
+              <i class="bi bi-arrow-repeat"></i> Load Roster
+            </button>
+          </div>
+        </div>
+
+        <!-- Evaluation Summary Metric Cards (per Theme Reference) -->
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="bi bi-calculator"></i></div>
+            <div>
+              <div class="stat-value" id="classAvgStat">41.8 / 50</div>
+              <div class="stat-label">Class Average Score (83.6%)</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-trophy-fill"></i></div>
+            <div>
+              <div class="stat-value" id="highestScoreStat">48.5 / 50</div>
+              <div class="stat-label">Highest Score (Aadi Gupta)</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon orange"><i class="bi bi-graph-down"></i></div>
+            <div>
+              <div class="stat-value" id="lowestScoreStat">26.0 / 50</div>
+              <div class="stat-label">Lowest Score (Cutoff: 20.0)</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple"><i class="bi bi-check-circle-fill"></i></div>
+            <div>
+              <div class="stat-value" id="passRateStat">100%</div>
+              <div class="stat-label">Passing Rate (15/15 Passed)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+          <div style="font-size: 0.88rem; font-weight: 600; color: var(--primary);">
+            Student Marks Sheet &mdash; Maximum Marks: 50 (Written: 30 &bull; Internal: 20)
+          </div>
+          <div class="table-search" style="margin-bottom: 0; min-width: 240px;">
+            <i class="bi bi-search"></i>
+            <input type="text" id="gradeTableFilter" placeholder="Filter student name or roll...">
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="table-card">
+          <table id="gradesTable">
+            <thead>
+              <tr>
+                <th style="width: 45px;">#</th>
+                <th>Student Information</th>
+                <th>Roll No</th>
+                <th style="text-align: center;">Written (30)</th>
+                <th style="text-align: center;">Internal (20)</th>
+                <th style="text-align: center;">Total (50)</th>
+                <th style="text-align: center;">Percentage</th>
+                <th style="text-align: center;">Grade</th>
+                <th style="text-align: center;">Status</th>
+                <th>Remarks</th>
+              </tr>
+            </thead>
+            <tbody id="gradesTableBody">
+
+              <!-- Student 1 -->
+              <tr data-roll="2415000001" data-name="Aadi Gupta">
+                <td>1</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">AG</div>
+                    <div class="student-info">
+                      <div class="student-name">Aadi Gupta</div>
+                      <div class="student-roll">GLA-2415000001</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000001</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="29.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="19.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">48.5</td>
+                <td style="text-align: center;" class="percent-val">97.0%</td>
+                <td style="text-align: center;"><span class="pill green grade-badge">O</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Outstanding React &amp; Node implementation"></td>
+              </tr>
+
+              <!-- Student 2 -->
+              <tr data-roll="2415000028" data-name="Abhimanyu Sharma">
+                <td>2</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #2563eb;">AS</div>
+                    <div class="student-info">
+                      <div class="student-name">Abhimanyu Sharma</div>
+                      <div class="student-roll">GLA-2415000028</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000028</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="27.5" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="18.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">46.0</td>
+                <td style="text-align: center;" class="percent-val">92.0%</td>
+                <td style="text-align: center;"><span class="pill green grade-badge">O</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Excellent backend API design"></td>
+              </tr>
+
+              <!-- Student 3 -->
+              <tr data-roll="2415000064" data-name="Abhishek Vishwakarma">
+                <td>3</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #f59e0b;">AV</div>
+                    <div class="student-info">
+                      <div class="student-name">Abhishek Vishwakarma</div>
+                      <div class="student-roll">GLA-2415000064</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000064</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="28.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="18.0" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">46.0</td>
+                <td style="text-align: center;" class="percent-val">92.0%</td>
+                <td style="text-align: center;"><span class="pill green grade-badge">O</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Great UI layout and styling"></td>
+              </tr>
+
+              <!-- Student 4 -->
+              <tr data-roll="2415000089" data-name="Aditya Gupta">
+                <td>4</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #7c3aed;">AG</div>
+                    <div class="student-info">
+                      <div class="student-name">Aditya Gupta</div>
+                      <div class="student-roll">GLA-2415000089</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000089</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="26.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="18.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">44.5</td>
+                <td style="text-align: center;" class="percent-val">89.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A+</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Strong performance in data handling"></td>
+              </tr>
+
+              <!-- Student 5 -->
+              <tr data-roll="2415000102" data-name="Ananya Verma">
+                <td>5</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #dc2626;">AV</div>
+                    <div class="student-info">
+                      <div class="student-name">Ananya Verma</div>
+                      <div class="student-roll">GLA-2415000102</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000102</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="20.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="14.0" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">34.0</td>
+                <td style="text-align: center;" class="percent-val">68.0%</td>
+                <td style="text-align: center;"><span class="pill orange grade-badge">B+</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Needs attendance improvement"></td>
+              </tr>
+
+              <!-- Student 6 -->
+              <tr data-roll="2415000115" data-name="Karan Johal">
+                <td>6</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">KJ</div>
+                    <div class="student-info">
+                      <div class="student-name">Karan Johal</div>
+                      <div class="student-roll">GLA-2415000115</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000115</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="24.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="16.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">40.5</td>
+                <td style="text-align: center;" class="percent-val">81.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A+</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Consistent in lab assessments"></td>
+              </tr>
+
+              <!-- Student 7 -->
+              <tr data-roll="2415000134" data-name="Mehul Chawla">
+                <td>7</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #f59e0b;">MC</div>
+                    <div class="student-info">
+                      <div class="student-name">Mehul Chawla</div>
+                      <div class="student-roll">GLA-2415000134</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000134</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="22.5" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="15.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">38.0</td>
+                <td style="text-align: center;" class="percent-val">76.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Good conceptual clarity"></td>
+              </tr>
+
+              <!-- Student 8 -->
+              <tr data-roll="2415000148" data-name="Pooja Tripathi">
+                <td>8</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #16a34a;">PT</div>
+                    <div class="student-info">
+                      <div class="student-name">Pooja Tripathi</div>
+                      <div class="student-roll">GLA-2415000148</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000148</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="27.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="18.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">45.5</td>
+                <td style="text-align: center;" class="percent-val">91.0%</td>
+                <td style="text-align: center;"><span class="pill green grade-badge">O</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Excellent practical test results"></td>
+              </tr>
+
+              <!-- Student 9 -->
+              <tr data-roll="2415000162" data-name="Rohan Mehta">
+                <td>9</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">RM</div>
+                    <div class="student-info">
+                      <div class="student-name">Rohan Mehta</div>
+                      <div class="student-roll">GLA-2415000162</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000162</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="25.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="17.0" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">42.0</td>
+                <td style="text-align: center;" class="percent-val">84.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A+</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Solid understanding of MongoDB"></td>
+              </tr>
+
+              <!-- Student 10 -->
+              <tr data-roll="2415000177" data-name="Sneha Patel">
+                <td>10</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #0891b2;">SP</div>
+                    <div class="student-info">
+                      <div class="student-name">Sneha Patel</div>
+                      <div class="student-roll">GLA-2415000177</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000177</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="16.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="10.0" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">26.0</td>
+                <td style="text-align: center;" class="percent-val">52.0%</td>
+                <td style="text-align: center;"><span class="pill purple grade-badge">B</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Medical leave during internal tests"></td>
+              </tr>
+
+              <!-- Student 11 -->
+              <tr data-roll="2415000189" data-name="Tanmay Sen">
+                <td>11</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">TS</div>
+                    <div class="student-info">
+                      <div class="student-name">Tanmay Sen</div>
+                      <div class="student-roll">GLA-2415000189</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000189</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="26.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="17.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">43.5</td>
+                <td style="text-align: center;" class="percent-val">87.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A+</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Good API integration work"></td>
+              </tr>
+
+              <!-- Student 12 -->
+              <tr data-roll="2415000201" data-name="Utkarsh Rawat">
+                <td>12</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">UR</div>
+                    <div class="student-info">
+                      <div class="student-name">Utkarsh Rawat</div>
+                      <div class="student-roll">GLA-2415000201</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000201</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="25.5" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="16.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">42.0</td>
+                <td style="text-align: center;" class="percent-val">84.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A+</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Active participant in labs"></td>
+              </tr>
+
+              <!-- Student 13 -->
+              <tr data-roll="2415000215" data-name="Vartika Kashyap">
+                <td>13</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #db2777;">VK</div>
+                    <div class="student-info">
+                      <div class="student-name">Vartika Kashyap</div>
+                      <div class="student-roll">GLA-2415000215</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000215</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="24.5" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="15.0" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">39.5</td>
+                <td style="text-align: center;" class="percent-val">79.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Well-structured answers"></td>
+              </tr>
+
+              <!-- Student 14 -->
+              <tr data-roll="2415000228" data-name="Yashvardhan Jain">
+                <td>14</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar">YJ</div>
+                    <div class="student-info">
+                      <div class="student-name">Yashvardhan Jain</div>
+                      <div class="student-roll">GLA-2415000228</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000228</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="25.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="16.0" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">41.0</td>
+                <td style="text-align: center;" class="percent-val">82.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A+</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Good analytical skills"></td>
+              </tr>
+
+              <!-- Student 15 -->
+              <tr data-roll="2415000240" data-name="Zoya Fatima">
+                <td>15</td>
+                <td>
+                  <div class="student-cell">
+                    <div class="student-avatar" style="background: #0284c7;">ZF</div>
+                    <div class="student-info">
+                      <div class="student-name">Zoya Fatima</div>
+                      <div class="student-roll">GLA-2415000240</div>
+                    </div>
+                  </div>
+                </td>
+                <td><strong>2415000240</strong></td>
+                <td style="text-align: center;"><input type="number" class="marks-input written-input" value="23.0" min="0" max="30" step="0.5"></td>
+                <td style="text-align: center;"><input type="number" class="marks-input internal-input" value="15.5" min="0" max="20" step="0.5"></td>
+                <td style="text-align: center; font-weight: 700;" class="total-score">38.5</td>
+                <td style="text-align: center;" class="percent-val">77.0%</td>
+                <td style="text-align: center;"><span class="pill blue grade-badge">A</span></td>
+                <td style="text-align: center;"><span class="pill green status-badge">Pass</span></td>
+                <td><input type="text" class="remarks-input" value="Very good performance"></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Footer Actions -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 14px;">
+          <div style="font-size: 0.84rem; color: var(--text-muted);">
+            Marks saved will be staged for COE verification before final portal publication.
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
+            <button class="btn btn-success" id="saveGradesBottomBtn"><i class="bi bi-cloud-arrow-up-fill"></i> Save Staged Marks</button>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Publish Confirmation Modal -->
+  <div class="modal-overlay" id="publishModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Publish Examination Results</h3>
+        <button class="modal-close" id="modalCloseBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to release official marks to the Student Portal:</p>
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin: 12px 0;">
+          <div><strong>Course:</strong> BCS-503 (Full Stack Scripting)</div>
+          <div><strong>Class:</strong> Section 3B &bull; 15 Students</div>
+          <div><strong>Average Score:</strong> <span id="modalAvgScore">41.8 / 50</span></div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">
+          Students will immediately be notified on their portal dashboards once published.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" id="modalCancelBtn">Cancel</button>
+        <button class="btn btn-primary" id="modalConfirmBtn">Confirm &amp; Publish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      const icon = type === 'success' ? 'bi-check-circle-fill' : 'bi-info-circle-fill';
+      toast.innerHTML = `<i class="bi ${icon}"></i> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 50);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 250);
+      }, 3200);
+    }
+
+    function calculateGrade(total) {
+      const percent = (total / 50) * 100;
+      let grade = 'F', pillClass = 'pill red', status = 'Fail', statusClass = 'pill red';
+
+      if (percent >= 90) {
+        grade = 'O'; pillClass = 'pill green'; status = 'Pass'; statusClass = 'pill green';
+      } else if (percent >= 80) {
+        grade = 'A+'; pillClass = 'pill blue'; status = 'Pass'; statusClass = 'pill green';
+      } else if (percent >= 70) {
+        grade = 'A'; pillClass = 'pill blue'; status = 'Pass'; statusClass = 'pill green';
+      } else if (percent >= 60) {
+        grade = 'B+'; pillClass = 'pill orange'; status = 'Pass'; statusClass = 'pill green';
+      } else if (percent >= 50) {
+        grade = 'B'; pillClass = 'pill purple'; status = 'Pass'; statusClass = 'pill green';
+      } else if (percent >= 40) {
+        grade = 'C'; pillClass = 'pill orange'; status = 'Pass'; statusClass = 'pill green';
+      }
+
+      return { percent: percent.toFixed(1), grade, pillClass, status, statusClass };
+    }
+
+    function recalculateGrades() {
+      const rows = document.querySelectorAll('#gradesTableBody tr');
+      let totalScores = [], passedCount = 0, visibleCount = 0;
+
+      rows.forEach(row => {
+        if (row.style.display !== 'none') {
+          visibleCount++;
+          const writtenInput = row.querySelector('.written-input');
+          const internalInput = row.querySelector('.internal-input');
+
+          let written = parseFloat(writtenInput?.value || 0);
+          let internal = parseFloat(internalInput?.value || 0);
+
+          if (written > 30) { written = 30; writtenInput.value = 30; }
+          if (written < 0) { written = 0; writtenInput.value = 0; }
+          if (internal > 20) { internal = 20; internalInput.value = 20; }
+          if (internal < 0) { internal = 0; internalInput.value = 0; }
+
+          const total = written + internal;
+          totalScores.push(total);
+
+          const { percent, grade, pillClass, status, statusClass } = calculateGrade(total);
+
+          row.querySelector('.total-score').textContent = total.toFixed(1);
+          row.querySelector('.percent-val').textContent = percent + '%';
+
+          const gradeBadgeEl = row.querySelector('.grade-badge');
+          gradeBadgeEl.className = `${pillClass} grade-badge`;
+          gradeBadgeEl.textContent = grade;
+
+          const statusBadgeEl = row.querySelector('.status-badge');
+          statusBadgeEl.className = `${statusClass} status-badge`;
+          statusBadgeEl.textContent = status;
+
+          if (status === 'Pass') passedCount++;
+        }
+      });
+
+      if (totalScores.length > 0) {
+        const sum = totalScores.reduce((acc, curr) => acc + curr, 0);
+        const avg = sum / totalScores.length;
+        const highest = Math.max(...totalScores);
+        const lowest = Math.min(...totalScores);
+
+        document.getElementById('classAvgStat').textContent = `${avg.toFixed(1)} / 50`;
+        document.getElementById('highestScoreStat').textContent = `${highest.toFixed(1)} / 50`;
+        document.getElementById('lowestScoreStat').textContent = `${lowest.toFixed(1)} / 50`;
+
+        const passRate = ((passedCount / visibleCount) * 100).toFixed(1);
+        document.getElementById('passRateStat').textContent = `${passRate}%`;
+
+        const modalAvg = document.getElementById('modalAvgScore');
+        if (modalAvg) modalAvg.textContent = `${avg.toFixed(1)} / 50 (${((avg / 50) * 100).toFixed(1)}%)`;
+      }
+    }
+
+    document.querySelectorAll('.written-input, .internal-input').forEach(input => {
+      input.addEventListener('input', recalculateGrades);
+    });
+
+    function filterGradeTable(term) {
+      term = term.toLowerCase().trim();
+      const rows = document.querySelectorAll('#gradesTableBody tr');
+      rows.forEach(row => {
+        const name = (row.getAttribute('data-name') || '').toLowerCase();
+        const roll = (row.getAttribute('data-roll') || '').toLowerCase();
+        row.style.display = (name.includes(term) || roll.includes(term)) ? '' : 'none';
+      });
+      recalculateGrades();
+    }
+
+    document.getElementById('gradeTableFilter').addEventListener('input', e => filterGradeTable(e.target.value));
+    const topSearch = document.getElementById('topSearch');
+    if (topSearch) {
+      topSearch.addEventListener('input', e => {
+        filterGradeTable(e.target.value);
+        document.getElementById('gradeTableFilter').value = e.target.value;
+      });
+    }
+
+    function saveMarks() {
+      const course = document.getElementById('resultCourseSelect').value;
+      showToast(`Marks for ${course} saved and synced successfully!`);
+    }
+
+    document.getElementById('saveGradesTopBtn').addEventListener('click', saveMarks);
+    document.getElementById('saveGradesBottomBtn').addEventListener('click', saveMarks);
+
+    document.getElementById('exportGradebookBtn').addEventListener('click', () => {
+      const rows = document.querySelectorAll('#gradesTableBody tr');
+      let csv = 'S.No,Roll Number,Student Name,Written (30),Internal (20),Total (50),Percentage,Grade,Status,Remarks\n';
+      let index = 1;
+
+      rows.forEach(row => {
+        if (row.style.display !== 'none') {
+          const roll = row.getAttribute('data-roll');
+          const name = row.getAttribute('data-name');
+          const written = row.querySelector('.written-input')?.value || 0;
+          const internal = row.querySelector('.internal-input')?.value || 0;
+          const total = row.querySelector('.total-score')?.textContent || 0;
+          const percent = row.querySelector('.percent-val')?.textContent || 0;
+          const grade = row.querySelector('.grade-badge')?.textContent || 'F';
+          const status = row.querySelector('.status-badge')?.textContent || 'Fail';
+          const remarks = row.querySelector('.remarks-input')?.value || '';
+          csv += `"${index}","${roll}","${name}","${written}","${internal}","${total}","${percent}","${grade}","${status}","${remarks}"\n`;
+          index++;
+        }
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Gradebook_${document.getElementById('resultCourseSelect').value}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('Gradebook report exported to CSV');
+    });
+
+    const publishModal = document.getElementById('publishModal');
+    document.getElementById('publishModalBtn').addEventListener('click', () => publishModal.classList.add('active'));
+    document.getElementById('modalCloseBtn').addEventListener('click', () => publishModal.classList.remove('active'));
+    document.getElementById('modalCancelBtn').addEventListener('click', () => publishModal.classList.remove('active'));
+    document.getElementById('modalConfirmBtn').addEventListener('click', () => {
+      publishModal.classList.remove('active');
+      showToast('Results published to Student Portal!');
+    });
+
+    recalculateGrades();
+  </script>
+
+</body>
+</html>
