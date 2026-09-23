@@ -108,9 +108,9 @@
             <p>Upload, calculate, and publish student assessment marks, midterm scores, and semester grades.</p>
           </div>
           <div class="header-actions">
-            <button class="btn btn-outline" onclick="window.print()"><i class="bi bi-printer"></i> Print</button>
+            <button class="btn btn-outline" ><i class="bi bi-printer"></i> Print</button>
             <button class="btn btn-outline-primary" id="exportGradebookBtn"><i class="bi bi-file-earmark-arrow-down"></i> Export CSV</button>
-            <button class="btn btn-primary" id="publishModalBtn"><i class="bi bi-send-check"></i> Publish to Portal</button>
+            <label for="publish-modal-toggle" class="btn btn-primary" style="cursor: pointer;"><i class="bi bi-send-check"></i> Publish to Portal</label>
             <button class="btn btn-success" id="saveGradesTopBtn"><i class="bi bi-cloud-arrow-up"></i> Save Marks</button>
           </div>
         </div>
@@ -574,202 +574,31 @@
 
   </div>
 
-  <!-- Publish Confirmation Modal -->
+    <!-- Pure CSS Publish Confirmation Modal -->
+  <input type="checkbox" id="publish-modal-toggle" class="modal-toggle-input">
   <div class="modal-overlay" id="publishModal">
     <div class="modal-box">
       <div class="modal-header">
         <h3>Publish Examination Results</h3>
-        <button class="modal-close" id="modalCloseBtn">&times;</button>
+        <label for="publish-modal-toggle" class="modal-close">&times;</label>
       </div>
       <div class="modal-body">
         <p>You are about to release official marks to the Student Portal:</p>
         <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin: 12px 0;">
           <div><strong>Course:</strong> BCS-503 (Full Stack Scripting)</div>
           <div><strong>Class:</strong> Section 3B &bull; 15 Students</div>
-          <div><strong>Average Score:</strong> <span id="modalAvgScore">41.8 / 50</span></div>
+          <div><strong>Average Score:</strong> 41.8 / 50 (83.6%)</div>
         </div>
         <p style="font-size: 0.8rem; color: var(--text-muted);">
           Students will immediately be notified on their portal dashboards once published.
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-outline" id="modalCancelBtn">Cancel</button>
-        <button class="btn btn-primary" id="modalConfirmBtn">Confirm &amp; Publish</button>
+        <label for="publish-modal-toggle" class="btn btn-outline" style="cursor: pointer;">Cancel</label>
+        <label for="publish-modal-toggle" class="btn btn-primary" style="cursor: pointer;">Confirm &amp; Publish</label>
       </div>
     </div>
   </div>
-
-  <!-- Toast Notification Container -->
-  <div class="toast-container" id="toastContainer"></div>
-
-  <!-- Interactive JavaScript -->
-  <script>
-    function showToast(message, type = 'success') {
-      const container = document.getElementById('toastContainer');
-      const toast = document.createElement('div');
-      toast.className = `toast ${type}`;
-      const icon = type === 'success' ? 'bi-check-circle-fill' : 'bi-info-circle-fill';
-      toast.innerHTML = `<i class="bi ${icon}"></i> <span>${message}</span>`;
-      container.appendChild(toast);
-      setTimeout(() => toast.classList.add('show'), 50);
-      setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 250);
-      }, 3200);
-    }
-
-    function calculateGrade(total) {
-      const percent = (total / 50) * 100;
-      let grade = 'F', pillClass = 'pill red', status = 'Fail', statusClass = 'pill red';
-
-      if (percent >= 90) {
-        grade = 'O'; pillClass = 'pill green'; status = 'Pass'; statusClass = 'pill green';
-      } else if (percent >= 80) {
-        grade = 'A+'; pillClass = 'pill blue'; status = 'Pass'; statusClass = 'pill green';
-      } else if (percent >= 70) {
-        grade = 'A'; pillClass = 'pill blue'; status = 'Pass'; statusClass = 'pill green';
-      } else if (percent >= 60) {
-        grade = 'B+'; pillClass = 'pill orange'; status = 'Pass'; statusClass = 'pill green';
-      } else if (percent >= 50) {
-        grade = 'B'; pillClass = 'pill purple'; status = 'Pass'; statusClass = 'pill green';
-      } else if (percent >= 40) {
-        grade = 'C'; pillClass = 'pill orange'; status = 'Pass'; statusClass = 'pill green';
-      }
-
-      return { percent: percent.toFixed(1), grade, pillClass, status, statusClass };
-    }
-
-    function recalculateGrades() {
-      const rows = document.querySelectorAll('#gradesTableBody tr');
-      let totalScores = [], passedCount = 0, visibleCount = 0;
-
-      rows.forEach(row => {
-        if (row.style.display !== 'none') {
-          visibleCount++;
-          const writtenInput = row.querySelector('.written-input');
-          const internalInput = row.querySelector('.internal-input');
-
-          let written = parseFloat(writtenInput?.value || 0);
-          let internal = parseFloat(internalInput?.value || 0);
-
-          if (written > 30) { written = 30; writtenInput.value = 30; }
-          if (written < 0) { written = 0; writtenInput.value = 0; }
-          if (internal > 20) { internal = 20; internalInput.value = 20; }
-          if (internal < 0) { internal = 0; internalInput.value = 0; }
-
-          const total = written + internal;
-          totalScores.push(total);
-
-          const { percent, grade, pillClass, status, statusClass } = calculateGrade(total);
-
-          row.querySelector('.total-score').textContent = total.toFixed(1);
-          row.querySelector('.percent-val').textContent = percent + '%';
-
-          const gradeBadgeEl = row.querySelector('.grade-badge');
-          gradeBadgeEl.className = `${pillClass} grade-badge`;
-          gradeBadgeEl.textContent = grade;
-
-          const statusBadgeEl = row.querySelector('.status-badge');
-          statusBadgeEl.className = `${statusClass} status-badge`;
-          statusBadgeEl.textContent = status;
-
-          if (status === 'Pass') passedCount++;
-        }
-      });
-
-      if (totalScores.length > 0) {
-        const sum = totalScores.reduce((acc, curr) => acc + curr, 0);
-        const avg = sum / totalScores.length;
-        const highest = Math.max(...totalScores);
-        const lowest = Math.min(...totalScores);
-
-        document.getElementById('classAvgStat').textContent = `${avg.toFixed(1)} / 50`;
-        document.getElementById('highestScoreStat').textContent = `${highest.toFixed(1)} / 50`;
-        document.getElementById('lowestScoreStat').textContent = `${lowest.toFixed(1)} / 50`;
-
-        const passRate = ((passedCount / visibleCount) * 100).toFixed(1);
-        document.getElementById('passRateStat').textContent = `${passRate}%`;
-
-        const modalAvg = document.getElementById('modalAvgScore');
-        if (modalAvg) modalAvg.textContent = `${avg.toFixed(1)} / 50 (${((avg / 50) * 100).toFixed(1)}%)`;
-      }
-    }
-
-    document.querySelectorAll('.written-input, .internal-input').forEach(input => {
-      input.addEventListener('input', recalculateGrades);
-    });
-
-    function filterGradeTable(term) {
-      term = term.toLowerCase().trim();
-      const rows = document.querySelectorAll('#gradesTableBody tr');
-      rows.forEach(row => {
-        const name = (row.getAttribute('data-name') || '').toLowerCase();
-        const roll = (row.getAttribute('data-roll') || '').toLowerCase();
-        row.style.display = (name.includes(term) || roll.includes(term)) ? '' : 'none';
-      });
-      recalculateGrades();
-    }
-
-    document.getElementById('gradeTableFilter').addEventListener('input', e => filterGradeTable(e.target.value));
-    const topSearch = document.getElementById('topSearch');
-    if (topSearch) {
-      topSearch.addEventListener('input', e => {
-        filterGradeTable(e.target.value);
-        document.getElementById('gradeTableFilter').value = e.target.value;
-      });
-    }
-
-    function saveMarks() {
-      const course = document.getElementById('resultCourseSelect').value;
-      showToast(`Marks for ${course} saved and synced successfully!`);
-    }
-
-    document.getElementById('saveGradesTopBtn').addEventListener('click', saveMarks);
-    document.getElementById('saveGradesBottomBtn').addEventListener('click', saveMarks);
-
-    document.getElementById('exportGradebookBtn').addEventListener('click', () => {
-      const rows = document.querySelectorAll('#gradesTableBody tr');
-      let csv = 'S.No,Roll Number,Student Name,Written (30),Internal (20),Total (50),Percentage,Grade,Status,Remarks\n';
-      let index = 1;
-
-      rows.forEach(row => {
-        if (row.style.display !== 'none') {
-          const roll = row.getAttribute('data-roll');
-          const name = row.getAttribute('data-name');
-          const written = row.querySelector('.written-input')?.value || 0;
-          const internal = row.querySelector('.internal-input')?.value || 0;
-          const total = row.querySelector('.total-score')?.textContent || 0;
-          const percent = row.querySelector('.percent-val')?.textContent || 0;
-          const grade = row.querySelector('.grade-badge')?.textContent || 'F';
-          const status = row.querySelector('.status-badge')?.textContent || 'Fail';
-          const remarks = row.querySelector('.remarks-input')?.value || '';
-          csv += `"${index}","${roll}","${name}","${written}","${internal}","${total}","${percent}","${grade}","${status}","${remarks}"\n`;
-          index++;
-        }
-      });
-
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.setAttribute('href', url);
-      link.setAttribute('download', `Gradebook_${document.getElementById('resultCourseSelect').value}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      showToast('Gradebook report exported to CSV');
-    });
-
-    const publishModal = document.getElementById('publishModal');
-    document.getElementById('publishModalBtn').addEventListener('click', () => publishModal.classList.add('active'));
-    document.getElementById('modalCloseBtn').addEventListener('click', () => publishModal.classList.remove('active'));
-    document.getElementById('modalCancelBtn').addEventListener('click', () => publishModal.classList.remove('active'));
-    document.getElementById('modalConfirmBtn').addEventListener('click', () => {
-      publishModal.classList.remove('active');
-      showToast('Results published to Student Portal!');
-    });
-
-    recalculateGrades();
-  </script>
 
 </body>
 </html>
