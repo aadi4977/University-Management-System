@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - GLA UMS</title>
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+  <main class="auth-card">
+    <div class="auth-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <h1>Create account</h1>
+    <p class="lead">Sign up to access your university portal.</p>
+
+    <div id="form-msg" class="form-msg" role="alert" hidden></div>
+
+    <form id="signup-form" novalidate>
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="e.g. Aadi Sharma" autocomplete="name">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="role">Role</label>
+          <select id="role">
+            <option value="student" selected>Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="userid">Roll No / ID</label>
+          <input type="text" id="userid" placeholder="e.g. 21BCE1234">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@gla.ac.in" autocomplete="email">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Min 6 characters" autocomplete="new-password">
+        </div>
+        <div class="field">
+          <label for="confirm">Confirm Password</label>
+          <input type="password" id="confirm" placeholder="Re-enter password" autocomplete="new-password">
+        </div>
+      </div>
+
+      <label class="check"><input type="checkbox" id="show-pass"> Show passwords</label>
+
+      <button type="submit" class="btn-primary">Sign Up</button>
+    </form>
+
+    <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>

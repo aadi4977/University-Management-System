@@ -1,0 +1,104 @@
+/* ==========================================================
+   University Management System (GLA University Mathura)
+   Auth -- Sign Up page. Same theme tokens as admin/ + student/.
+   ========================================================== */
+
+:root {
+  --primary: #0d3b66;
+  --primary-light: #2563eb;
+  --gold: #f0a202;
+  --green: #16a34a;
+  --red: #dc2626;
+  --white: #ffffff;
+  --bg: #f7f9fc;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 30px;
+}
+
+.auth-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+.auth-logo img { width: 36px; height: 36px; object-fit: contain; }
+.auth-logo .name { font-weight: 700; color: var(--primary); font-size: 1.05rem; line-height: 1.15; }
+.auth-logo .tagline { font-size: 0.68rem; color: var(--text-muted); }
+
+.auth-card h1 { font-size: 1.5rem; font-weight: 700; }
+.auth-card .lead { color: var(--text-muted); font-size: 0.88rem; margin: 4px 0 20px; }
+
+.field { margin-bottom: 14px; }
+
+.field label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; }
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 1px;
+  background: var(--white);
+}
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.check { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; }
+
+.btn-primary {
+  width: 100%;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-light);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-primary:hover { background: var(--primary); }
+
+.form-msg { padding: 10px 12px; border-radius: 8px; font-size: 0.82rem; margin-bottom: 14px; font-weight: 500; }
+.form-msg[hidden] { display: none; }
+.form-msg.error { background: #fee2e2; color: #b91c1c; }
+.form-msg.success { background: #dcfce7; color: #15803d; }
+
+.auth-switch { margin-top: 18px; text-align: center; font-size: 0.84rem; color: var(--text-muted); }
+.auth-switch a { color: var(--primary-light); font-weight: 600; text-decoration: none; }
+.auth-switch a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  .auth-card { padding: 24px 18px; }
+  .field-row { grid-template-columns: 1fr; gap: 0; }
+}
