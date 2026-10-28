@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timetable - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <ul class="side-nav">
+      <li><a href="../dashboard/index.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a href="../attendance/index.html"><i class="bi bi-calendar-check-fill"></i>My Attendance</a></li>
+      <li><a href="../result/index.html"><i class="bi bi-bar-chart-fill"></i>My Results</a></li>
+      <li><a href="../courses/index.html"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+      <li><a href="../fee/index.html"><i class="bi bi-cash-coin"></i>Fee Status</a></li>
+      <li><a href="index.html" class="active"><i class="bi bi-clock-history"></i>Timetable</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <ul class="side-nav">
+        <li><a href="../../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="main">
+    <header class="topbar">
+      <div class="topbar-search">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Search for courses, notices, or anything...">
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-bell" aria-hidden="true">
+          <i class="bi bi-bell-fill"></i>
+        </span>
+        <div class="topbar-profile">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Aadi</div>
+            <div class="sub">Roll No. 21BCE1234</div>
+          </div>
+          <i class="bi bi-chevron-down profile-chevron"></i>
+        </div>
+      </div>
+    </header>
+
+      <div class="content">
+
+        <nav class="breadcrumb">
+          <a href="../dashboard/index.html"><i class="bi bi-house-door"></i>Dashboard</a>
+          <span class="sep">&rsaquo;</span>
+          <span class="current">Timetable</span>
+        </nav>
+
+        <div class="page-header">
+          <div>
+            <h1>Timetable</h1>
+            <p>Your weekly class schedule at a glance.</p>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <h3>Weekly Timetable &ndash; Semester V</h3>
+          <table class="timetable">
+            <thead>
+              <tr><th>Time</th><th data-day="Mon">Mon</th><th data-day="Tue">Tue</th><th data-day="Wed">Wed</th><th data-day="Thu">Thu</th><th data-day="Fri">Fri</th><th data-day="Sat">Sat</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tt-time">9:00 &ndash; 10:00</td><td data-day="Mon"><div class="tt-sub">Computer Networks</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Tue"><div class="tt-sub">Full Stack (Scripting)</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-301</div></td><td data-day="Wed"><div class="tt-sub">Theory Of Automata</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Thu"><div class="tt-sub">Build &amp; Release Automation</div><div class="tt-room"><i class="bi bi-geo-alt"></i>C-105</div></td><td data-day="Fri"><div class="tt-sub">Competitive Programming</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-402</div></td><td data-day="Sat"><div class="tt-sub">Computer Networks</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td></tr>
+              <tr><td class="tt-time">10:00 &ndash; 11:00</td><td data-day="Mon"><div class="tt-sub">Theory Of Automata</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Tue"><div class="tt-sub">Computer Networks</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Wed"><div class="tt-sub">Build &amp; Release Automation</div><div class="tt-room"><i class="bi bi-geo-alt"></i>C-105</div></td><td data-day="Thu"><div class="tt-sub">Full Stack (Scripting)</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-301</div></td><td data-day="Fri"><div class="tt-sub">Theory Of Automata</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Sat"><div class="tt-sub">Build &amp; Release Automation</div><div class="tt-room"><i class="bi bi-geo-alt"></i>C-105</div></td></tr>
+              <tr><td class="tt-time">11:00 &ndash; 12:00</td><td data-day="Mon"><div class="tt-sub">Build &amp; Release Automation</div><div class="tt-room"><i class="bi bi-geo-alt"></i>C-105</div></td><td data-day="Tue"><div class="tt-sub">Competitive Programming</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-402</div></td><td data-day="Wed"><div class="tt-sub">Computer Networks</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Thu"><div class="tt-sub">Theory Of Automata</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Fri"><div class="tt-sub">Full Stack (Scripting)</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-301</div></td><td data-day="Sat" class="tt-free">&mdash;</td></tr>
+              <tr><td class="tt-time">12:00 &ndash; 1:00</td><td data-day="Mon"><div class="tt-sub">Competitive Programming</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-402</div></td><td data-day="Tue" class="tt-free">&mdash;</td><td data-day="Wed"><div class="tt-sub">Full Stack (Scripting)</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-301</div></td><td data-day="Thu"><div class="tt-sub">Computer Networks</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Fri"><div class="tt-sub">Build &amp; Release Automation</div><div class="tt-room"><i class="bi bi-geo-alt"></i>C-105</div></td><td data-day="Sat" class="tt-free">&mdash;</td></tr>
+              <tr class="tt-break"><td>1:00 &ndash; 2:00</td><td colspan="6">Lunch Break</td></tr>
+              <tr><td class="tt-time">2:00 &ndash; 3:00</td><td data-day="Mon"><div class="tt-sub">Full Stack (Scripting)</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-301</div></td><td data-day="Tue"><div class="tt-sub">FSST Lab</div><div class="tt-room"><i class="bi bi-geo-alt"></i>Lab-2</div></td><td data-day="Wed"><div class="tt-sub">Competitive Programming</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-402</div></td><td data-day="Thu" class="tt-free">&mdash;</td><td data-day="Fri"><div class="tt-sub">Computer Networks</div><div class="tt-room"><i class="bi bi-geo-alt"></i>B-204</div></td><td data-day="Sat" class="tt-free">&mdash;</td></tr>
+              <tr><td class="tt-time">3:00 &ndash; 4:00</td><td data-day="Mon" class="tt-free">&mdash;</td><td data-day="Tue"><div class="tt-sub">FSST Lab</div><div class="tt-room"><i class="bi bi-geo-alt"></i>Lab-2</div></td><td data-day="Wed" class="tt-free">&mdash;</td><td data-day="Thu" class="tt-free">&mdash;</td><td data-day="Fri" class="tt-free">&mdash;</td><td data-day="Sat" class="tt-free">&mdash;</td></tr>
+            </tbody>
+          </table>
+          <p class="table-footnote">Today&rsquo;s column is highlighted automatically. Sample schedule &ndash; replace with real data later.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../student.js"></script>
+</body>
+</html>
