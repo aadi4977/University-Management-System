@@ -1,4 +1,9 @@
-
+/* ==========================================================
+   GLA UMS - Student portal shared script (student/student.js)
+   Loaded by every student page via <script src="../student.js">.
+   Keeps things basic: session read, profile fill, logout,
+   table search, highlight today's column.
+   ========================================================== */
 
 (function () {
   'use strict';

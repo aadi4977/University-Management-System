@@ -23,9 +23,9 @@
       <li><a href="../dashboard/index.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
       <li><a href="index.html" class="active"><i class="bi bi-calendar-check-fill"></i>My Attendance</a></li>
       <li><a href="../result/index.html"><i class="bi bi-bar-chart-fill"></i>My Results</a></li>
-      <li><a href="#"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
-      <li><a href="#"><i class="bi bi-cash-coin"></i>Fee Status</a></li>
-      <li><a href="#"><i class="bi bi-clock-history"></i>Timetable</a></li>
+      <li><a href="../courses/index.html"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+      <li><a href="../fee/index.html"><i class="bi bi-cash-coin"></i>Fee Status</a></li>
+      <li><a href="../timetable/index.html"><i class="bi bi-clock-history"></i>Timetable</a></li>
     </ul>
 
     <div class="sidebar-footer">
@@ -42,58 +42,13 @@
         <input type="text" placeholder="Search for courses, notices, or anything...">
       </div>
       <div class="topbar-right">
-        <div class="notif-wrap">
-          <input type="checkbox" id="notif-toggle" class="notif-toggle-input">
-          <label for="notif-toggle" class="topbar-bell" aria-label="Notifications">
-            <i class="bi bi-bell-fill"></i>
-            <span class="notif-badge">1</span>
-          </label>
-          <div class="notif-panel">
-            <div class="notif-panel-header">Notifications</div>
-            <ul class="notif-list">
-            <li>
-              <i class="bi bi-journal-bookmark-fill notif-icon"></i>
-              <div class="notif-body">
-                <div class="notif-text">Mid-Term Examination schedule published</div>
-                <div class="notif-time">5 hours ago</div>
-              </div>
-            </li>
-            <li>
-              <i class="bi bi-cash-coin notif-icon"></i>
-              <div class="notif-body">
-                <div class="notif-text">Fee payment reminder -- due by Oct 3</div>
-                <div class="notif-time">Yesterday</div>
-              </div>
-            </li>
-            <li>
-              <i class="bi bi-mortarboard-fill notif-icon"></i>
-              <div class="notif-body">
-                <div class="notif-text">Semester V results have been declared</div>
-                <div class="notif-time">Yesterday</div>
-              </div>
-            </li>
-            <li>
-              <i class="bi bi-calendar-event-fill notif-icon"></i>
-              <div class="notif-body">
-                <div class="notif-text">New event: Tech Talk on Sep 28</div>
-                <div class="notif-time">2 days ago</div>
-              </div>
-            </li>
-            <li>
-              <i class="bi bi-exclamation-circle-fill notif-icon"></i>
-              <div class="notif-body">
-                <div class="notif-text">Attendance below 75% in Competitive Programming</div>
-                <div class="notif-time">2 days ago</div>
-              </div>
-            </li>
-            </ul>
-            <div class="notif-panel-footer">This is sample data -- not wired to anything yet.</div>
-          </div>
-        </div>
+        <span class="topbar-bell" aria-hidden="true">
+          <i class="bi bi-bell-fill"></i>
+        </span>
         <div class="topbar-profile">
           <div class="avatar">A</div>
           <div>
-            <div class="name">Abhishek Vishwakarma</div>
+            <div class="name">Aadi</div>
             <div class="sub">Roll No. 21BCE1234</div>
           </div>
           <i class="bi bi-chevron-down profile-chevron"></i>
@@ -227,5 +182,6 @@
     </div>
   </div>
 
+  <script src="../student.js"></script>
 </body>
 </html>
