@@ -1,26 +1,42 @@
-# Feature: Manage Faculty (admin/manage-faculty)
+# Manage Faculty (admin/manage-faculty)
 
-Admin screen listing faculty records, sidebar admin-panel layout.
+## What is this page?
+The page where the admin sees and manages all faculty members.
 
-## What it does
+## What can you do here?
+- See all faculty in a table (the "On Leave" status stays on one line)
+- Search by name, ID, department, subject or email
+- Add a new faculty member - this also creates their login (password `faculty123`)
+- Edit a faculty member (the Faculty ID cannot be changed)
+- Delete a faculty member - their login is removed too
+- The cards at the top (Total / On Leave / Departments) update by themselves
 
-Three stat cards (Total / On Leave / Departments) + a search box + a
-table of hardcoded faculty records (S.No, Faculty ID, Name, Department,
-Subjects Assigned, Contact, Email, Status). Contact is now a phone
-number, separate from Email; Status is an Active/On Leave pill matching
-the "On Leave" stat card. No avatar/initial icons before names, and no
-Action column -- kept plain on purpose. Notification bell opens a
-dropdown of 5 hardcoded sample notifications -- pure HTML/CSS, no
-JavaScript (click the bell again to close; no click-outside-to-close).
-Icons are Bootstrap Icons via CDN.
+## What is used?
+- **HTML + CSS** - the design of the page
+- **JavaScript** (`index.js`) - makes the page work
+- **jQuery** - makes the JavaScript shorter and easier
+- **localStorage** - saves the data inside your browser (no server needed)
+- **Bootstrap Icons** - the small icons
 
-## Files included
+## Files
+- `index.html` and `index.css` - the page and its design
+- `index.js` - the working part of this page
+- `logo.png` - the GLA UMS logo
 
-- `index.html`
-- `index.css`
-- `logo.png`
+## How the JavaScript is connected
+These 4 lines are already at the end of `index.html`, just before `</body>`:
 
-## Usage / integration
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="../../js/storage.js"></script>
+<script src="../../js/common.js"></script>
+<script src="index.js"></script>
+```
 
-Sits at `admin/manage-faculty/` in the project. Table rows are
-hardcoded sample data -- swap them for real records later.
+## Good to know
+- Demo login for this page: `admin` / `admin123`
+- All data is demo data. It is created automatically the first time you open the site.
+- Comments like `//////// Search box` in `index.js` show which code belongs to which part of the page.
+- The subjects written here are the ones students see on their Faculty & Hierarchy page.
+- The top search bar was removed. The search box above the table is the one that works.
+- The notification bell still shows sample messages (not connected to anything).
