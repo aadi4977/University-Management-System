@@ -1,24 +1,42 @@
-# Feature: Manage Students (admin/manage-students)
+# Manage Students (admin/manage-students)
 
-Admin screen listing student records, sidebar admin-panel layout.
+## What is this page?
+The page where the admin sees and manages all students of the university.
 
-## What it does
+## What can you do here?
+- See all students in a table
+- Search by name, roll no, course or email
+- Add a new student - this also creates the student's login (password `student123`) and a fee record
+- Edit a student (the roll no cannot be changed)
+- Delete a student - their login, fee, attendance and results are removed too
+- The cards at the top (Total / Active / On Leave) update by themselves
 
-Three stat cards (Total / Active / On Leave) + a search box + a table of
-hardcoded student records (S.No, Roll No, Name, Course, Semester,
-Contact, Email, Status). No Action column -- kept out on purpose since
-there is no backend to act on yet. Notification bell opens a dropdown of
-5 hardcoded sample notifications -- pure HTML/CSS, no JavaScript (click
-the bell again to close; no click-outside-to-close). Icons are Bootstrap
-Icons via CDN.
+## What is used?
+- **HTML + CSS** - the design of the page
+- **JavaScript** (`index.js`) - makes the page work
+- **jQuery** - makes the JavaScript shorter and easier
+- **localStorage** - saves the data inside your browser (no server needed)
+- **Bootstrap Icons** - the small icons
 
-## Files included
+## Files
+- `index.html` and `index.css` - the page and its design
+- `index.js` - the working part of this page
+- `logo.png` - the GLA UMS logo
 
-- `index.html`
-- `index.css`
-- `logo.png`
+## How the JavaScript is connected
+These 4 lines are already at the end of `index.html`, just before `</body>`:
 
-## Usage / integration
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="../../js/storage.js"></script>
+<script src="../../js/common.js"></script>
+<script src="index.js"></script>
+```
 
-Sits at `admin/manage-students/` in the project. Table rows are
-hardcoded sample data -- swap them for real records later.
+## Good to know
+- Demo login for this page: `admin` / `admin123`
+- All data is demo data. It is created automatically the first time you open the site.
+- Comments like `//////// Search box` in `index.js` show which code belongs to which part of the page.
+- The **Action** column (edit / delete icons) and the **Add Student** button are added by the JavaScript.
+- The top search bar was removed. The search box above the table is the one that works.
+- The notification bell still shows sample messages (not connected to anything).
