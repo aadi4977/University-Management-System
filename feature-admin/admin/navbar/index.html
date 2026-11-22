@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Reference - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!--
+    This page is NOT part of the live site and nothing links to it.
+    It exists only so the sidebar markup lives somewhere on its own --
+    open this file to see exactly what it looks like, then copy the
+    <aside class="sidebar">...</aside> block below into a new page.
+    See readme.md in this folder for the full explanation.
+  -->
+
+  <div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <ul class="side-nav">
+      <li><a href="#" class="active"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a href="#"><i class="bi bi-people-fill"></i>Students</a></li>
+      <li><a href="#"><i class="bi bi-person-check-fill"></i>Faculty</a></li>
+      <li><a href="#"><i class="bi bi-journal-bookmark-fill"></i>Courses</a></li>
+      <li><a href="#"><i class="bi bi-cash-coin"></i>Fees</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <ul class="side-nav">
+        <li><a href="#"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="main" style="display:flex;align-items:center;justify-content:center;">
+      <p style="max-width:360px;text-align:center;color:var(--text-muted);font-size:0.9rem;">
+        This is a reference copy of the sidebar only -- it isn't linked
+        from anywhere and doesn't link anywhere itself (the hrefs above
+        are all <code>#</code>). Copy the <code>&lt;aside
+        class="sidebar"&gt;</code> block into a new page's
+        <code>&lt;div class="app-shell"&gt;</code>, then fix the hrefs
+        and the <code>active</code> class for that page.
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

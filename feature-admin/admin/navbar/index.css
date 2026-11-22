@@ -1,0 +1,505 @@
+/* ==========================================================
+   University Management System (GLA University Mathura)
+   Admin panel -- shared sidebar layout theme.
+   One copy of this file, shared by every page in admin/.
+   ========================================================== */
+
+:root {
+  --primary: #0d3b66;
+  --primary-light: #2563eb;
+  --gold: #f0a202;
+  --green: #16a34a;
+  --orange: #f59e0b;
+  --purple: #7c3aed;
+  --teal: #0891b2;
+  --white: #ffffff;
+  --bg: #f7f9fc;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --radius: 10px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.app-shell { display: flex; min-height: 100vh; }
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 6px 24px;
+}
+
+.sidebar-logo img { width: 32px; height: 32px; object-fit: contain; }
+
+.sidebar-logo .name {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+.sidebar-logo .tagline {
+  font-size: 0.66rem;
+  color: var(--text-muted);
+}
+
+.side-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.side-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.side-nav a i { width: 18px; font-size: 1.05rem; text-align: center; flex-shrink: 0; }
+
+.side-nav a:hover { background: var(--bg); }
+
+.side-nav a.active {
+  background: #eaf1ff;
+  color: var(--primary-light);
+  font-weight: 600;
+}
+
+.sidebar-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); }
+
+/* ---------- Top bar ---------- */
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 28px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar-search { flex: 1; max-width: 420px; position: relative; }
+
+.topbar-search i {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.topbar-search input {
+  width: 100%;
+  padding: 9px 14px 9px 36px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: 0.87rem;
+}
+
+.topbar-right { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+
+/* real <button>, not a static icon -- clickable, but wired to nothing yet */
+/* notification bell + dropdown -- pure HTML/CSS, no JS.
+   The bell is a <label> for a visually-hidden checkbox; the panel is a
+   sibling of that checkbox, shown via the :checked ~ selector below. */
+
+.notif-wrap { position: relative; }
+
+.notif-toggle-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.topbar-bell {
+  color: var(--text-muted);
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.topbar-bell i { font-size: 1.15rem; }
+
+.topbar-bell:hover { color: var(--primary-light); background: var(--bg); }
+.notif-toggle-input:focus-visible ~ .topbar-bell { outline: 2px solid var(--primary-light); outline-offset: 2px; }
+
+.notif-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 300px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 50;
+}
+
+.notif-toggle-input:checked ~ .notif-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.notif-panel-header {
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+
+.notif-list { list-style: none; max-height: 280px; overflow-y: auto; }
+
+.notif-list li {
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.notif-list li:last-child { border-bottom: none; }
+
+.notif-icon { color: var(--primary-light); font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
+
+.notif-text { font-size: 0.82rem; color: var(--text); line-height: 1.35; }
+.notif-time { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+.notif-panel-footer {
+  padding: 10px 16px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.topbar-profile { display: flex; align-items: center; gap: 10px; }
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.topbar-profile .name { font-size: 0.86rem; font-weight: 600; }
+.topbar-profile .sub { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ---------- Content ---------- */
+
+.content { flex: 1; padding: 28px 32px; }
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.page-header h1 { font-size: 1.7rem; font-weight: 700; color: var(--text); }
+.page-header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
+
+/* ---------- Stat cards ---------- */
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon i { font-size: 1.3rem; }
+
+.stat-icon.blue { background: #e5edff; color: var(--primary-light); }
+.stat-icon.green { background: #e3f9ee; color: var(--green); }
+.stat-icon.orange { background: #fef3e2; color: var(--orange); }
+.stat-icon.purple { background: #f1e9ff; color: var(--purple); }
+
+.stat-value { font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ---------- Search box above table ---------- */
+
+.table-search { position: relative; max-width: 420px; margin-bottom: 18px; }
+
+.table-search i {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.table-search input {
+  width: 100%;
+  padding: 10px 14px 10px 36px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+
+/* ---------- Table ---------- */
+
+.table-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.table-card table { min-width: 720px; }
+
+table { width: 100%; border-collapse: collapse; }
+
+thead { background: var(--bg); }
+
+thead th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #f9fafc; }
+
+.pill {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.pill.green { background: #dcfce7; color: #15803d; }
+.pill.orange { background: #ffedd5; color: #c2410c; }
+
+/* ---------- Distribution donut charts (dashboard only) ---------- */
+
+.chart-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.chart-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+
+.chart-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 18px; }
+
+.chart-body { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+
+/* the ring itself: a conic-gradient circle with a plain white circle
+   punched out of the middle -- no chart library, just CSS */
+.donut {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-hole {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.donut-hole .value { font-size: 1.2rem; font-weight: 700; line-height: 1.15; }
+.donut-hole .label { font-size: 0.68rem; color: var(--text-muted); }
+
+.chart-legend {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-width: 170px;
+}
+
+.chart-legend li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+
+.chart-legend .legend-name { display: flex; align-items: center; }
+
+.chart-legend .swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.chart-legend .legend-value { font-weight: 600; }
+
+.swatch.blue { background: var(--primary-light); }
+.swatch.green { background: var(--green); }
+.swatch.orange { background: var(--orange); }
+.swatch.purple { background: var(--purple); }
+.swatch.teal { background: var(--teal); }
+
+/* ---------- Upcoming events (dashboard only) ---------- */
+
+.events-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 24px;
+}
+
+.events-card h3 { font-size: 1rem; font-weight: 700; }
+
+.event-list { list-style: none; margin-top: 10px; }
+
+.event-list li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.event-list li:last-child { border-bottom: none; }
+
+.event-date {
+  width: 50px;
+  flex-shrink: 0;
+  text-align: center;
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 6px 0;
+}
+
+.event-date .day { font-size: 0.98rem; font-weight: 700; color: var(--primary); line-height: 1.1; }
+.event-date .mon { font-size: 0.63rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+
+.event-info .title { font-size: 0.88rem; font-weight: 600; }
+.event-info .meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .app-shell { flex-direction: column; }
+  .sidebar { width: 100%; flex-direction: row; align-items: center; overflow-x: auto; padding: 12px 16px; }
+  .sidebar-logo { padding: 0 12px 0 0; }
+  .side-nav { flex-direction: row; }
+  .sidebar-footer { margin-top: 0; padding-top: 0; border-top: none; border-left: 1px solid var(--border); padding-left: 10px; }
+  .content { padding: 20px 16px; }
+  .topbar { padding: 12px 16px; }
+  .topbar-search { display: none; }
+  .chart-body { justify-content: center; }
+}
