@@ -1,144 +1,93 @@
 /* ==========================================================
-   GLA UMS - Auth script (auth/auth.js)
-   Handles BOTH signup.html and login.html. Basic on purpose.
+   University Management System (GLA University Mathura)
+   auth/auth.js  ->  SIGN UP PAGE (signup.html)
 
-   !! DEMO ONLY !!  Users + passwords live in localStorage in
-   plain text. Fine for a static college demo, NOT real auth.
-   Swap the two marked functions for fetch() calls once a
-   backend exists.
-
-   Form contract (ids the HTML must have):
-     signup.html : #signup-form  #name  #userid  #email  #role
-                   #password  #confirm  #form-msg   (+ optional #show-pass)
-     login.html  : #login-form   #identifier (or #email)  #password
-                   #form-msg     (+ optional #role, #show-pass)
+   What it does: checks the sign up form and creates a new
+   student or faculty account. The new person can log in at
+   once, and the admin sees them on the Students / Faculty page.
    ========================================================== */
 
-(function () {
-  'use strict';
+$(function () {
 
-  var USERS_KEY = 'ums_users';
-  var SESSION_KEY = 'ums_session';
+  const $msg = $('#form-msg');
 
-  var HOME = {
-    student: '../student/dashboard/index.html',
-    admin: '../admin/dashboard/index.html'
-    // faculty: no portal built yet
-  };
+  //////// Message box (red = error, green = success)
 
-  function $(id) { return document.getElementById(id); }
-
-  // ---------- storage ----------
-  function getUsers() {
-    try { return JSON.parse(localStorage.getItem(USERS_KEY)) || []; }
-    catch (e) { return []; }
-  }
-  function saveUsers(list) { localStorage.setItem(USERS_KEY, JSON.stringify(list)); }
-
-  // Seed two demo accounts so login works before anyone signs up.
-  if (getUsers().length === 0) {
-    saveUsers([
-      { name: 'Aadi', userId: '21BCE1234', email: 'student@gla.ac.in', role: 'student', password: 'student123' },
-      { name: 'Admin', userId: 'ADMIN01', email: 'admin@gla.ac.in', role: 'admin', password: 'admin123' }
-    ]);
+  function show(type, text) {
+    $msg.removeClass('error success').addClass(type).text(text).prop('hidden', false);
   }
 
-  // ---------- ui helpers ----------
-  function showMsg(text, type) {
-    var el = $('form-msg');
-    if (!el) { alert(text); return; }
-    el.textContent = text;
-    el.className = 'form-msg ' + (type || 'error');
-    el.hidden = false;
-  }
 
-  function wireShowPassword() {
-    var box = $('show-pass');
-    if (!box) return;
-    box.addEventListener('change', function () {
-      ['password', 'confirm'].forEach(function (id) {
-        if ($(id)) $(id).type = box.checked ? 'text' : 'password';
-      });
-    });
-  }
+  //////// "Show passwords" checkbox
 
-  // ---------- SIGNUP ----------
-  // >>> replace with fetch('/api/signup') later
-  function createUser(user) {
-    var users = getUsers();
-    var email = user.email.toLowerCase();
-    var uid = user.userId.toLowerCase();
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].email.toLowerCase() === email) return { ok: false, error: 'This email is already registered.' };
-      if (users[i].userId.toLowerCase() === uid) return { ok: false, error: 'This Roll No / ID is already registered.' };
+  $('#show-pass').on('change', function () {
+    $('#password, #confirm').attr('type', this.checked ? 'text' : 'password');
+  });
+
+
+  //////// Password strength bar (weak -> strong)
+
+  $('#password').on('input', function () {
+    const p = $(this).val();
+    let score = 0;
+    if (p.length >= 6) score++;
+    if (p.length >= 10) score++;
+    if (/[a-z]/.test(p) && /[A-Z]/.test(p)) score++;
+    if (/\d/.test(p)) score++;
+    if (/[^A-Za-z0-9]/.test(p)) score++;
+    if (p && score < 1) score = 1;   // anything typed is at least "very weak"
+    if (!p) score = 0;
+    $('#strength-bar').attr('data-level', score);
+    $('#strength-text').text(p ? ['', 'Very weak', 'Weak', 'Okay', 'Good', 'Strong'][score] || 'Very weak' : '');
+  });
+
+
+  //////// Roll No / ID hint changes with the chosen role
+
+  $('#role').on('change', function () {
+    const hints = { student: 'e.g. 2401001', faculty: 'e.g. F001', admin: 'Admin accounts are created by the office' };
+    $('#userid').attr('placeholder', hints[$(this).val()]);
+  });
+
+
+  //////// Sign Up button (form submit)
+
+  $('#signup-form').on('submit', function (e) {
+    e.preventDefault();
+
+    const v = {
+      name: $.trim($('#name').val()),
+      role: $('#role').val(),
+      id: $.trim($('#userid').val()),
+      email: $.trim($('#email').val()),
+      password: $('#password').val(),
+      confirm: $('#confirm').val()
+    };
+
+    // ---- checks (first problem found is shown)
+    if (!v.name || !v.id || !v.email || !v.password || !v.confirm) return show('error', 'Please fill in all the fields.');
+    if (!/^[A-Za-z][A-Za-z .'-]{2,}$/.test(v.name)) return show('error', 'Please enter a valid full name.');
+    if (v.role === 'admin') return show('error', 'Admin accounts are created by the university office. Please choose Student or Faculty.');
+    if (!/^[A-Za-z0-9]{3,15}$/.test(v.id) || (v.role === 'student' && v.id.length < 5)) return show('error', 'Roll No / ID must be 5-15 letters or digits (faculty: 3-15).');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) return show('error', 'Please enter a valid email.');
+    if (v.password.length < 6) return show('error', 'Password must be at least 6 characters.');
+    if (v.password !== v.confirm) return show('error', 'Passwords do not match.');
+
+    const users = UMS.store.getRecords('users');
+    if (users.some(u => u.username.toLowerCase() === v.id.toLowerCase())) return show('error', 'This Roll No / ID is already registered.');
+    if (users.some(u => u.email.toLowerCase() === v.email.toLowerCase())) return show('error', 'This email is already registered.');
+
+    // ---- create the account (student/faculty record + login), then set the chosen password
+    if (v.role === 'student') {
+      UMS.store.addStudent({ roll: v.id, name: v.name, course: 'B.Tech CSE', semester: '1st', contact: '', email: v.email, status: 'Active' });
+    } else {
+      UMS.store.addFaculty({ id: v.id, name: v.name, dept: 'Computer Science & Engineering', subjects: '', contact: '', email: v.email, status: 'Active' });
     }
-    users.push(user);
-    saveUsers(users);
-    return { ok: true };
-  }
+    UMS.store.updateRecord('users', v.id, { password: v.password });
 
-  var signupForm = $('signup-form');
-  if (signupForm) {
-    wireShowPassword();
-    signupForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+    show('success', 'Account created! Taking you to the login page...');
+    this.reset();
+    setTimeout(() => { location.href = 'login.html'; }, 1300);
+  });
 
-      var name = $('name').value.trim();
-      var userId = $('userid').value.trim();
-      var email = $('email').value.trim();
-      var role = $('role').value;
-      var password = $('password').value;
-      var confirm = $('confirm').value;
-
-      if (!name || !userId || !email || !role || !password || !confirm) return showMsg('Please fill in all fields.');
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showMsg('Enter a valid email address.');
-      if (password.length < 6) return showMsg('Password must be at least 6 characters.');
-      if (password !== confirm) return showMsg('Passwords do not match.');
-
-      var result = createUser({ name: name, userId: userId, email: email, role: role, password: password });
-      if (!result.ok) return showMsg(result.error);
-
-      showMsg('Account created! Redirecting to login...', 'success');
-      setTimeout(function () { window.location.href = 'login.html'; }, 1200);
-    });
-  }
-
-  // ---------- LOGIN ----------
-  // >>> replace with fetch('/api/login') later
-  function authenticate(identifier, password, role) {
-    var id = identifier.toLowerCase();
-    var users = getUsers();
-    for (var i = 0; i < users.length; i++) {
-      var u = users[i];
-      var idMatch = u.email.toLowerCase() === id || u.userId.toLowerCase() === id;
-      if (idMatch && u.password === password && (!role || u.role === role)) return u;
-    }
-    return null;
-  }
-
-  var loginForm = $('login-form');
-  if (loginForm) {
-    wireShowPassword();
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var idInput = $('identifier') || $('email');
-      var identifier = idInput ? idInput.value.trim() : '';
-      var password = $('password').value;
-      var role = $('role') ? $('role').value : '';
-
-      if (!identifier || !password) return showMsg('Enter your email / ID and password.');
-
-      var user = authenticate(identifier, password, role);
-      if (!user) return showMsg('Invalid credentials. Check your details and role.');
-
-      // never store the password in the session
-      localStorage.setItem(SESSION_KEY, JSON.stringify({
-        name: user.name, userId: user.userId, email: user.email, role: user.role
-      }));
-
-      if (!HOME[user.role]) return showMsg('Login ok, but the ' + user.role + ' portal is not built yet.', 'success');
-      window.location.href = HOME[user.role];
-    });
-  }
-})();
+});
