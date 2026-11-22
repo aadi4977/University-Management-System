@@ -102,3 +102,54 @@ body {
   .auth-card { padding: 24px 18px; }
   .field-row { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* ---------- extra look & feel (glow background, accent bar, entrance, password strength) ---------- */
+
+body { background: linear-gradient(135deg, #eef4ff 0%, #f7f9fc 45%, #fff7e6 100%); }
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before { width: 420px; height: 420px; background: var(--primary-light); opacity: 0.14; top: -140px; left: -120px; }
+body::after  { width: 380px; height: 380px; background: var(--gold); opacity: 0.18; bottom: -140px; right: -100px; }
+
+.auth-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(13, 59, 102, 0.14);
+  animation: fadeUp 0.6s ease both;
+}
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-light), var(--gold));
+}
+
+.btn-primary { background: linear-gradient(90deg, var(--primary-light), var(--primary)); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.btn-primary:hover { background: linear-gradient(90deg, var(--primary-light), var(--primary)); transform: translateY(-1px); box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3); }
+
+.strength { height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; margin: -4px 0 4px; }
+.strength-bar { height: 100%; width: 0; transition: width 0.25s ease, background 0.25s ease; }
+.strength-bar[data-level="1"] { width: 20%; background: #dc2626; }
+.strength-bar[data-level="2"] { width: 40%; background: #f59e0b; }
+.strength-bar[data-level="3"] { width: 60%; background: #eab308; }
+.strength-bar[data-level="4"] { width: 80%; background: #16a34a; }
+.strength-bar[data-level="5"] { width: 100%; background: #15803d; }
+.strength-text { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 14px; min-height: 1.2em; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) { .auth-card { animation: none; } }
+
