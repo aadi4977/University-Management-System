@@ -1,10 +1,14 @@
-// =============================================
-// GLA UMS – Attendance Page JavaScript (Enhanced)
-// =============================================
-
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ── SHARED: Toast ─────────────────────────────────────────────────────────
+  // Preselect course / section when arriving from the dashboard, courses or schedule pages
+  (function () {
+    var q = new URLSearchParams(window.location.search);
+    [["course", "courseSelect"], ["sec", "sectionSelect"]].forEach(function (pair) {
+      var v = q.get(pair[0]), el = document.getElementById(pair[1]);
+      if (v && el && Array.prototype.some.call(el.options, function (o) { return o.value === v; })) el.value = v;
+    });
+  })();
+
   function showToast(message, type) {
     var colors = { success:"#16a34a", error:"#dc2626", info:"#2563eb", warning:"#f59e0b" };
     var toast  = document.createElement("div");
@@ -23,14 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3500);
   }
 
-  // ── SHARED: get all rows (visible only when withFilter=true) ─────────────
   function getAllRows(visibleOnly) {
     var rows = document.querySelectorAll("#attendanceTableBody tr");
     if (!visibleOnly) return Array.from(rows);
     return Array.from(rows).filter(function (r) { return r.style.display !== "none"; });
   }
 
-  // ── 1. LIVE COUNTER UPDATE ────────────────────────────────────────────────
   function updateCounts() {
     var rows    = getAllRows(true);
     var total   = rows.length;
@@ -52,20 +54,17 @@ document.addEventListener("DOMContentLoaded", function () {
     var rate = total > 0 ? ((present + late) / total * 100).toFixed(1) : "0.0";
     document.getElementById("ratePercent").textContent = rate + "%";
 
-    // Colour the rate pill based on value
     var rateEl = document.getElementById("ratePercent");
     if (rateEl) {
       var rateNum = parseFloat(rate);
       rateEl.style.color = rateNum >= 75 ? "#16a34a" : rateNum >= 65 ? "#f59e0b" : "#dc2626";
     }
 
-    // Update page title with live count
     document.title = "Attendance (" + present + "/" + total + " Present) – GLA UMS";
   }
 
   updateCounts();
 
-  // Listen on all radios
   document.querySelectorAll("#attendanceTableBody input[type='radio']").forEach(function (r) {
     r.addEventListener("change", function () {
       updateCounts();
@@ -73,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Flash row green briefly when a radio changes
   function highlightChangedRow(row) {
     if (!row) return;
     row.style.transition  = "background .2s";
@@ -81,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () { row.style.background = ""; }, 600);
   }
 
-  // ── 2. MARK ALL PRESENT ───────────────────────────────────────────────────
   document.getElementById("markAllPresentBtn") &&
   document.getElementById("markAllPresentBtn").addEventListener("click", function () {
     getAllRows(true).forEach(function (row) {

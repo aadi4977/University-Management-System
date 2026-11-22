@@ -27,14 +27,15 @@
         <li><a href="dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
         <li><a href="attendance.html"><i class="bi bi-calendar-check-fill"></i>Attendance</a></li>
         <li><a href="results.html" class="active"><i class="bi bi-bar-chart-fill"></i>Results</a></li>
-        <li><a href="dashboard.html#courses"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
-        <li><a href="dashboard.html#schedule"><i class="bi bi-clock-history"></i>Schedule</a></li>
-        <li><a href="dashboard.html#notices"><i class="bi bi-bell-fill"></i>Notices</a></li>
+        <li><a href="courses.html"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+        <li><a href="schedule.html"><i class="bi bi-clock-history"></i>Schedule</a></li>
+        <li><a href="notices.html"><i class="bi bi-bell-fill"></i>Notices</a></li>
+        <li><a href="profile.html"><i class="bi bi-person-circle"></i>My Profile</a></li>
       </ul>
 
       <div class="sidebar-footer">
         <ul class="side-nav">
-          <li><a href="../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+          <li><a href="../auth/login.html" class="logout"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
         </ul>
       </div>
     </aside>
@@ -121,10 +122,9 @@
             <div class="filter-group">
               <label for="resultCourseSelect">Course / Subject</label>
               <select id="resultCourseSelect">
-                <option value="BCS-503" selected>BCS-503: Full Stack Using Scripting Technologies</option>
-                <option value="BCS-501">BCS-501: Computer Networks</option>
-                <option value="BCS-502">BCS-502: Theory of Automata &amp; Formal Languages</option>
-                <option value="BCS-504">BCS-504: Build &amp; Release Automation Lab</option>
+                <option value="BCSE1251" selected>BCSE1251: Full Stack Using Scripting Technologies</option>
+                <option value="BCSE0281">BCSE0281: Full Stack Using Scripting Technologies Lab</option>
+                <option value="PCPH0002">PCPH0002: Competitive Programming</option>
               </select>
             </div>
 
@@ -585,7 +585,7 @@
       <div class="modal-body">
         <p>You are about to release official marks to the Student Portal:</p>
         <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin: 12px 0;">
-          <div><strong>Course:</strong> BCS-503 (Full Stack Scripting)</div>
+          <div><strong>Course:</strong> BCSE1251 (Full Stack Using Scripting Technologies)</div>
           <div><strong>Class:</strong> Section 3B &bull; 15 Students</div>
           <div><strong>Average Score:</strong> 41.8 / 50 (83.6%)</div>
         </div>
@@ -599,6 +599,8 @@
       </div>
     </div>
   </div>
+
+  <script src="faculty-core.js"></script>
 
   <script src="results.js"></script>
 </body>

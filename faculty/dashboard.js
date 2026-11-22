@@ -47,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
       + " &nbsp;|&nbsp; " + h + ":" + m + ":" + s + " " + ampm;
   }
   updateClock();
+  var sd = document.getElementById("schedDate");
+  if (sd) sd.textContent = new Date().toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", year: "numeric" });
   setInterval(updateClock, 1000);  // every second so seconds tick
 
   // ── 2. GREETING based on time ─────────────────────────────────────────────
@@ -55,51 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var hr = new Date().getHours();
     var g  = hr < 12 ? "Good Morning ☀" : hr < 17 ? "Good Afternoon 🌤" : "Good Evening 🌙";
     greetingEl.textContent = g + " • " + greetingEl.textContent;
-  }
-
-  // ── 3. SIDEBAR TOGGLE (mobile) ────────────────────────────────────────────
-  var topbar  = document.querySelector(".topbar");
-  var sidebar = document.querySelector(".sidebar");
-
-  if (topbar && sidebar) {
-    var hamburger = document.createElement("button");
-    hamburger.innerHTML   = '<i class="bi bi-list"></i>';
-    hamburger.className   = "btn btn-outline";
-    hamburger.id          = "sidebarToggle";
-    hamburger.title       = "Toggle sidebar";
-    hamburger.style.cssText = "margin-right:12px; font-size:1.3rem; display:none;";
-    topbar.insertBefore(hamburger, topbar.firstChild);
-
-    var sStyle = document.createElement("style");
-    sStyle.textContent = [
-      ".sidebar-open { transform:translateX(0) !important; }",
-      ".sidebar-overlay { position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:199;display:none; }",
-      ".sidebar-overlay.active { display:block; }"
-    ].join("\n");
-    document.head.appendChild(sStyle);
-
-    var overlay = document.createElement("div");
-    overlay.className = "sidebar-overlay";
-    document.body.appendChild(overlay);
-
-    function checkSize() {
-      hamburger.style.display = window.innerWidth <= 900 ? "inline-flex" : "none";
-      if (window.innerWidth > 900) {
-        sidebar.classList.remove("sidebar-open");
-        overlay.classList.remove("active");
-      }
-    }
-    checkSize();
-    window.addEventListener("resize", checkSize);
-
-    hamburger.addEventListener("click", function () {
-      sidebar.classList.toggle("sidebar-open");
-      overlay.classList.toggle("active");
-    });
-    overlay.addEventListener("click", function () {
-      sidebar.classList.remove("sidebar-open");
-      overlay.classList.remove("active");
-    });
   }
 
   // ── 4. TOPBAR SEARCH — searches schedule AND course cards ─────────────────
@@ -132,75 +89,12 @@ document.addEventListener("DOMContentLoaded", function () {
             var msg = document.createElement("p");
             msg.className = "no-results-msg";
             msg.style.cssText = "text-align:center; color:#888; padding:16px; font-size:.875rem;";
-            msg.textContent = "No schedule items match "" + q + """;
+            msg.textContent = "No schedule items match \u201c" + q + "\u201d";
             schedulePanel.querySelector(".classes-list").after(msg);
           }
         } else if (existing) {
           existing.remove();
         }
-      }
-    });
-  }
-
-  // ── 5. PROFILE DROPDOWN with keyboard close (Escape) ─────────────────────
-  var profileEl = document.querySelector(".topbar-profile");
-  if (profileEl && topbar) {
-    var profileMenu = document.createElement("div");
-    profileMenu.style.cssText = [
-      "position:absolute; top:62px; right:16px;",
-      "background:var(--surface); border:1px solid var(--border);",
-      "border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,.15);",
-      "min-width:200px; padding:8px 0; display:none; z-index:999;"
-    ].join("");
-
-    var sessionRole = sessionStorage.getItem("ums_role") || "Faculty";
-    var sessionUser = sessionStorage.getItem("ums_user") || "Mr. Yash Singh";
-
-    profileMenu.innerHTML = [
-      '<div style="padding:12px 16px; border-bottom:1px solid var(--border); margin-bottom:4px;">',
-        '<div style="font-weight:700; font-size:.875rem;">' + sessionUser + '</div>',
-        '<div style="font-size:.75rem; color:#888;">' + sessionRole.charAt(0).toUpperCase() + sessionRole.slice(1) + ' · GLA University</div>',
-      '</div>',
-      '<a href="#" class="pm-link"><i class="bi bi-person-circle"></i> My Profile</a>',
-      '<a href="#" class="pm-link"><i class="bi bi-shield-lock"></i> Change Password</a>',
-      '<a href="#" class="pm-link"><i class="bi bi-gear"></i> Preferences</a>',
-      '<hr style="margin:4px 0; border-color:var(--border);">',
-      '<a href="../auth/login.html" class="pm-link" style="color:#dc2626 !important;"><i class="bi bi-box-arrow-right"></i> Logout</a>'
-    ].join("");
-
-    var pmStyle = document.createElement("style");
-    pmStyle.textContent = ".pm-link{display:flex;align-items:center;gap:9px;padding:9px 16px;color:var(--text);text-decoration:none;font-size:.875rem;transition:background .15s;} .pm-link:hover{background:var(--bg);}";
-    document.head.appendChild(pmStyle);
-
-    topbar.style.position = "relative";
-    topbar.appendChild(profileMenu);
-    profileEl.style.cursor = "pointer";
-
-    profileEl.addEventListener("click", function (e) {
-      e.stopPropagation();
-      profileMenu.style.display = profileMenu.style.display === "block" ? "none" : "block";
-    });
-    document.addEventListener("click", function () { profileMenu.style.display = "none"; });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") profileMenu.style.display = "none";
-    });
-  }
-
-  // ── 6. NOTIFICATION PANEL — badge clears + marks items as read ───────────
-  var notifToggle = document.getElementById("notif-toggle");
-  var notifBadge  = document.querySelector(".notif-badge");
-
-  if (notifToggle && notifBadge) {
-    notifToggle.addEventListener("change", function () {
-      if (notifToggle.checked) {
-        setTimeout(function () {
-          notifBadge.textContent = "0";
-          notifBadge.style.background = "#888";
-          // Dim all unread notification items
-          document.querySelectorAll(".notif-list li").forEach(function (li) {
-            li.style.opacity = "0.65";
-          });
-        }, 600);
       }
     });
   }

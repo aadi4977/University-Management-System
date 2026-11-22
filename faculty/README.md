@@ -18,13 +18,13 @@ A web-based academic and attendance management module for faculty members at GLA
 
 ### 1. Faculty Dashboard (`dashboard.html`)
 - **Faculty Profile Card**: Displays faculty details (Mr. Yash Singh, Assistant Professor, Department of Computer Engineering & Applications, Cabin AB2-304).
-- **Core Academic Metrics**: Assigned course count (4 courses / 14 credit hours), total enrolled students (248 students), today's scheduled lectures, and class average attendance rate (84.2%).
+- **Core Academic Metrics**: Assigned course count (3 courses / 8 credits), total enrolled students (124 students), today's scheduled lectures, and class average attendance rate (85.0%).
 - **Interactive Daily Schedule**: Chronological listing of today's lectures and labs with room numbers, timings, current status badges (`Completed`, `Next Lecture`, `Upcoming`), and instant "Mark Attendance" triggers.
 - **Course Syllabus & Attendance Trackers**: Visual progress bars showing syllabus completion and section attendance health.
 - **Department Notices**: Official examination and circular notifications from the Dean of Academics and Examination Cell.
 
 ### 2. Attendance Tracking (`attendance.html`)
-- **Multi-parameter Filtering**: Filter class rosters by Course (BCS-501, BCS-502, BCS-503, BCS-504), Section (3A, 3B, 3C), Date, and Lecture slot.
+- **Multi-parameter Filtering**: Filter class rosters by Course (BCSE1251, BCSE0281, PCPH0002), Section (3A, 3B, 3C), Date, and Lecture slot.
 - **Student Roster**: Preloaded with B.Tech CSE 3rd-year student data, including university roll numbers (`2415000001`, `2415000028`, `2415000064`, `2415000089`, etc.).
 - **Live Counter Recalculation**: Instant recalculation of Total, Present, Absent, Late/Excused counts, and class percentage whenever status radio buttons change.
 - **Bulk Productivity Actions**:
@@ -50,3 +50,17 @@ A web-based academic and attendance management module for faculty members at GLA
 - Direct link from `../auth/login.html` when selecting the **Faculty** role.
 - Consistent sidebar navigation connecting `dashboard.html`, `attendance.html`, and `results.html`.
 - Logout action seamlessly redirects back to `../auth/login.html`.
+
+
+---
+
+## ➕ Latest Additions
+
+- **`courses.html` / `courses.js`** — course cards with filters and search, a syllabus checklist per course (progress saved in `localStorage`), and CSV export.
+- **`schedule.html` / `schedule.js`** — weekly timetable (Mon–Sat) with the current class highlighted, slot detail popups, clash-checked "Add Extra Class", print, and `.ics` calendar export.
+- **`notices.html` / `notices.js`** — circulars with category tabs, search, unread tracking, and posting or deleting your own class notices.
+- **`profile.html` / `profile.js`** — editable profile with validation, change-password with strength meter (the login page accepts the new password), and saved preferences.
+- **`faculty-core.js`** — shared on every page: session guard (redirects to login), mobile slide-in menu, profile dropdown, toasts, logout.
+- **Fixes** — `dashboard.js` had a syntax error that stopped the whole script from running; the mobile sidebar is now a proper drawer; `attendance.html?course=...&sec=...` links now preselect the course and section; login now defaults to Faculty and loads its icons.
+
+Demo login: `faculty` / `faculty123`. All data is stored client-side only (no backend).

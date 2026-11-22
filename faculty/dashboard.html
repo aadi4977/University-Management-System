@@ -27,14 +27,15 @@
         <li><a href="dashboard.html" class="active"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
         <li><a href="attendance.html"><i class="bi bi-calendar-check-fill"></i>Attendance</a></li>
         <li><a href="results.html"><i class="bi bi-bar-chart-fill"></i>Results</a></li>
-        <li><a href="#courses"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
-        <li><a href="#schedule"><i class="bi bi-clock-history"></i>Schedule</a></li>
-        <li><a href="#notices"><i class="bi bi-bell-fill"></i>Notices</a></li>
+        <li><a href="courses.html"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+        <li><a href="schedule.html"><i class="bi bi-clock-history"></i>Schedule</a></li>
+        <li><a href="notices.html"><i class="bi bi-bell-fill"></i>Notices</a></li>
+        <li><a href="profile.html"><i class="bi bi-person-circle"></i>My Profile</a></li>
       </ul>
 
       <div class="sidebar-footer">
         <ul class="side-nav">
-          <li><a href="../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+          <li><a href="../auth/login.html" class="logout"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
         </ul>
       </div>
     </aside>
@@ -70,7 +71,7 @@
                 <li>
                   <i class="bi bi-exclamation-triangle-fill notif-icon" style="color: var(--orange);"></i>
                   <div class="notif-body">
-                    <div class="notif-text">Attendance below 75% for 14 students in BCS-501</div>
+                    <div class="notif-text">Attendance below 75% for 6 students in BCSE1251</div>
                     <div class="notif-time">5 hours ago</div>
                   </div>
                 </li>
@@ -121,28 +122,28 @@
           <div class="stat-card">
             <div class="stat-icon blue"><i class="bi bi-journal-bookmark-fill"></i></div>
             <div>
-              <div class="stat-value">4</div>
+              <div class="stat-value">3</div>
               <div class="stat-label">Assigned Courses</div>
             </div>
           </div>
           <div class="stat-card">
             <div class="stat-icon green"><i class="bi bi-people-fill"></i></div>
             <div>
-              <div class="stat-value">248</div>
+              <div class="stat-value">124</div>
               <div class="stat-label">Enrolled Students</div>
             </div>
           </div>
           <div class="stat-card">
             <div class="stat-icon orange"><i class="bi bi-clock-history"></i></div>
             <div>
-              <div class="stat-value">4</div>
+              <div class="stat-value">3</div>
               <div class="stat-label">Today's Lectures</div>
             </div>
           </div>
           <div class="stat-card">
             <div class="stat-icon purple"><i class="bi bi-award-fill"></i></div>
             <div>
-              <div class="stat-value">84.2%</div>
+              <div class="stat-value">85.0%</div>
               <div class="stat-label">Average Attendance</div>
             </div>
           </div>
@@ -158,56 +159,44 @@
             <div class="panel-card" id="schedule">
               <div class="panel-card-header">
                 <h3><i class="bi bi-calendar-event"></i> Today's Schedule</h3>
-                <span class="panel-date">Wed, 23 Sep 2026</span>
+                <span class="panel-date" id="schedDate">Wed, 23 Sep 2026</span>
               </div>
               <ul class="classes-list">
                 <li>
                   <div class="class-time">09:00 AM<br>10:00 AM</div>
                   <div class="class-info">
-                    <div class="title">BCS-501 &ndash; Computer Networks</div>
+                    <div class="title">PCPH0002 &ndash; Competitive Programming</div>
                     <div class="meta">
-                      <span><i class="bi bi-geo-alt"></i> AB2-304</span>
-                      <span><i class="bi bi-people"></i> Section 3A</span>
+                      <span><i class="bi bi-geo-alt"></i> AB1-102</span>
+                      <span><i class="bi bi-people"></i> Section 3C</span>
                       <span class="pill green">Completed</span>
                     </div>
                   </div>
-                  <a href="attendance.html" class="btn btn-outline btn-sm">View Roster</a>
+                  <a href="attendance.html?course=PCPH0002&sec=Sec+3C" class="btn btn-outline btn-sm">View Roster</a>
                 </li>
                 <li style="border-left: 3px solid var(--orange);">
                   <div class="class-time" style="color: var(--orange);">11:00 AM<br>12:00 PM</div>
                   <div class="class-info">
-                    <div class="title">BCS-503 &ndash; Full Stack Using Scripting</div>
+                    <div class="title">BCSE1251 &ndash; Full Stack Using Scripting Technologies</div>
                     <div class="meta">
-                      <span><i class="bi bi-geo-alt"></i> Computer Lab 7</span>
+                      <span><i class="bi bi-geo-alt"></i> AB2-304</span>
                       <span><i class="bi bi-people"></i> Section 3B</span>
                       <span class="pill orange">Next Up</span>
                     </div>
                   </div>
-                  <a href="attendance.html?course=BCS-503&sec=Sec+3B" class="btn btn-sm">Mark Attendance</a>
-                </li>
-                <li>
-                  <div class="class-time">01:00 PM<br>02:00 PM</div>
-                  <div class="class-info">
-                    <div class="title">BCS-502 &ndash; Theory of Automata</div>
-                    <div class="meta">
-                      <span><i class="bi bi-geo-alt"></i> Room AB1-102</span>
-                      <span><i class="bi bi-people"></i> Section 3C</span>
-                      <span class="pill blue">Upcoming</span>
-                    </div>
-                  </div>
-                  <a href="attendance.html" class="btn btn-outline btn-sm">Attendance</a>
+                  <a href="attendance.html?course=BCSE1251&sec=Sec+3B" class="btn btn-sm">Mark Attendance</a>
                 </li>
                 <li>
                   <div class="class-time">03:30 PM<br>05:00 PM</div>
                   <div class="class-info">
-                    <div class="title">BCS-504 &ndash; Build &amp; Release Automation Lab</div>
+                    <div class="title">BCSE0281 &ndash; Full Stack Using Scripting Technologies Lab</div>
                     <div class="meta">
-                      <span><i class="bi bi-geo-alt"></i> DevOps Lab (Block 2)</span>
-                      <span><i class="bi bi-people"></i> Batch 3A-Lab 1</span>
+                      <span><i class="bi bi-geo-alt"></i> Computer Lab 7</span>
+                      <span><i class="bi bi-people"></i> Batch 3B &ndash; Lab 1</span>
                       <span class="pill purple">Practical Lab</span>
                     </div>
                   </div>
-                  <a href="attendance.html" class="btn btn-outline btn-sm">Attendance</a>
+                  <a href="attendance.html?course=BCSE0281&sec=Sec+3B" class="btn btn-outline btn-sm">Attendance</a>
                 </li>
               </ul>
             </div>
@@ -216,97 +205,42 @@
             <div class="panel-card" id="courses">
               <div class="panel-card-header">
                 <h3><i class="bi bi-mortarboard-fill"></i> My Assigned Courses</h3>
-                <a href="results.html" style="font-size: 0.82rem; color: var(--primary-light); text-decoration: none; font-weight: 600;">Manage Results &rarr;</a>
+                <a href="courses.html" style="font-size: 0.82rem; color: var(--primary-light); text-decoration: none; font-weight: 600;">View all courses &rarr;</a>
               </div>
               <div class="course-grid">
-                <!-- Course 1 -->
                 <div class="course-card">
                   <div>
                     <div class="course-card-top">
-                      <span class="course-code">BCS-501 &bull; 4 Credits</span>
-                      <span class="pill green">86% Attd.</span>
-                    </div>
-                    <div class="course-name">Computer Networks</div>
-                    <div class="course-meta">
-                      <span><i class="bi bi-people"></i> 62 Students</span>
-                      <span><i class="bi bi-calendar3"></i> 4 Lec/wk</span>
-                    </div>
-                    <div class="course-progress-bar">
-                      <div class="course-progress-fill" style="width: 68%;"></div>
-                    </div>
-                    <div class="course-progress-label">
-                      <span>Syllabus Covered</span>
-                      <strong>68% (Unit 3/5)</strong>
-                    </div>
-                  </div>
-                  <div style="display: flex; gap: 8px;">
-                    <a href="attendance.html" class="btn btn-outline btn-sm" style="flex: 1;">Attendance</a>
-                    <a href="results.html" class="btn btn-outline-primary btn-sm" style="flex: 1;">Results</a>
-                  </div>
-                </div>
-
-                <!-- Course 2 -->
-                <div class="course-card">
-                  <div>
-                    <div class="course-card-top">
-                      <span class="course-code">BCS-503 &bull; 4 Credits</span>
+                      <span class="course-code">BCSE1251 &bull; 4 Credits</span>
                       <span class="pill green">84% Attd.</span>
                     </div>
-                    <div class="course-name">Full Stack Scripting</div>
+                    <div class="course-name">Full Stack Using Scripting Technologies</div>
                     <div class="course-meta">
                       <span><i class="bi bi-people"></i> 60 Students</span>
-                      <span><i class="bi bi-calendar3"></i> 4 Lec/wk</span>
+                      <span><i class="bi bi-calendar3"></i> 3 Lec/wk</span>
                     </div>
                     <div class="course-progress-bar">
-                      <div class="course-progress-fill" style="width: 75%;"></div>
+                      <div class="course-progress-fill" style="width: 80%;"></div>
                     </div>
                     <div class="course-progress-label">
                       <span>Syllabus Covered</span>
-                      <strong>75% (MERN)</strong>
+                      <strong>80% (Unit 4/5)</strong>
                     </div>
                   </div>
                   <div style="display: flex; gap: 8px;">
-                    <a href="attendance.html" class="btn btn-outline btn-sm" style="flex: 1;">Attendance</a>
+                    <a href="attendance.html?course=BCSE1251&sec=Sec+3B" class="btn btn-outline btn-sm" style="flex: 1;">Attendance</a>
                     <a href="results.html" class="btn btn-outline-primary btn-sm" style="flex: 1;">Results</a>
                   </div>
                 </div>
-
-                <!-- Course 3 -->
                 <div class="course-card">
                   <div>
                     <div class="course-card-top">
-                      <span class="course-code">BCS-502 &bull; 4 Credits</span>
-                      <span class="pill orange">79% Attd.</span>
-                    </div>
-                    <div class="course-name">Theory of Automata</div>
-                    <div class="course-meta">
-                      <span><i class="bi bi-people"></i> 64 Students</span>
-                      <span><i class="bi bi-calendar3"></i> 4 Lec/wk</span>
-                    </div>
-                    <div class="course-progress-bar">
-                      <div class="course-progress-fill" style="width: 62%; background: var(--orange);"></div>
-                    </div>
-                    <div class="course-progress-label">
-                      <span>Syllabus Covered</span>
-                      <strong>62% (PDA)</strong>
-                    </div>
-                  </div>
-                  <div style="display: flex; gap: 8px;">
-                    <a href="attendance.html" class="btn btn-outline btn-sm" style="flex: 1;">Attendance</a>
-                    <a href="results.html" class="btn btn-outline-primary btn-sm" style="flex: 1;">Results</a>
-                  </div>
-                </div>
-
-                <!-- Course 4 -->
-                <div class="course-card">
-                  <div>
-                    <div class="course-card-top">
-                      <span class="course-code">BCS-504 &bull; 2 Credits</span>
+                      <span class="course-code">BCSE0281 &bull; 2 Credits</span>
                       <span class="pill green">92% Attd.</span>
                     </div>
-                    <div class="course-name">Build &amp; Release Lab</div>
+                    <div class="course-name">Full Stack Using Scripting Technologies Lab</div>
                     <div class="course-meta">
-                      <span><i class="bi bi-people"></i> 62 Students</span>
+                      <span><i class="bi bi-people"></i> 60 Students</span>
                       <span><i class="bi bi-calendar3"></i> 2 Labs/wk</span>
                     </div>
                     <div class="course-progress-bar">
@@ -314,11 +248,35 @@
                     </div>
                     <div class="course-progress-label">
                       <span>Syllabus Covered</span>
-                      <strong>80% (CI/CD)</strong>
+                      <strong>80% (Exp 8/10)</strong>
                     </div>
                   </div>
                   <div style="display: flex; gap: 8px;">
-                    <a href="attendance.html" class="btn btn-outline btn-sm" style="flex: 1;">Attendance</a>
+                    <a href="attendance.html?course=BCSE0281&sec=Sec+3B" class="btn btn-outline btn-sm" style="flex: 1;">Attendance</a>
+                    <a href="results.html" class="btn btn-outline-primary btn-sm" style="flex: 1;">Results</a>
+                  </div>
+                </div>
+                <div class="course-card">
+                  <div>
+                    <div class="course-card-top">
+                      <span class="course-code">PCPH0002 &bull; 2 Credits</span>
+                      <span class="pill orange">79% Attd.</span>
+                    </div>
+                    <div class="course-name">Competitive Programming</div>
+                    <div class="course-meta">
+                      <span><i class="bi bi-people"></i> 64 Students</span>
+                      <span><i class="bi bi-calendar3"></i> 2 Lec/wk</span>
+                    </div>
+                    <div class="course-progress-bar">
+                      <div class="course-progress-fill" style="width: 60%; background: var(--orange);"></div>
+                    </div>
+                    <div class="course-progress-label">
+                      <span>Syllabus Covered</span>
+                      <strong>60% (Graphs)</strong>
+                    </div>
+                  </div>
+                  <div style="display: flex; gap: 8px;">
+                    <a href="attendance.html?course=PCPH0002&sec=Sec+3C" class="btn btn-outline btn-sm" style="flex: 1;">Attendance</a>
                     <a href="results.html" class="btn btn-outline-primary btn-sm" style="flex: 1;">Results</a>
                   </div>
                 </div>
@@ -361,22 +319,22 @@
               <div class="chart-body">
                 <div class="donut" style="background: conic-gradient(var(--green) 0% 76%, var(--orange) 76% 92%, #dc2626 92% 100%);">
                   <div class="donut-hole">
-                    <div class="value">84.2%</div>
+                    <div class="value">85.0%</div>
                     <div class="label">Average</div>
                   </div>
                 </div>
                 <ul class="chart-legend">
                   <li>
                     <span class="legend-name"><span class="swatch green"></span>&ge; 75% Safe</span>
-                    <span class="legend-value">188 students</span>
+                    <span class="legend-value">94 students</span>
                   </li>
                   <li>
                     <span class="legend-name"><span class="swatch orange"></span>65–74% Alert</span>
-                    <span class="legend-value">40 students</span>
+                    <span class="legend-value">10 students</span>
                   </li>
                   <li>
                     <span class="legend-name"><span class="swatch" style="background: #dc2626;"></span>&lt; 65% Shortfall</span>
-                    <span class="legend-value">20 students</span>
+                    <span class="legend-value">10 students</span>
                   </li>
                 </ul>
               </div>
@@ -384,7 +342,7 @@
 
             <!-- Academic Notices / Events (per Theme Reference) -->
             <div class="events-card" id="notices">
-              <h3>Academic Circulars &amp; Notices</h3>
+              <div style="display:flex;justify-content:space-between;align-items:center;"><h3>Academic Circulars &amp; Notices</h3><a href="notices.html" style="font-size: 0.82rem; color: var(--primary-light); text-decoration: none; font-weight: 600;">View all &rarr;</a></div>
               <ul class="event-list">
                 <li>
                   <div class="event-date">
@@ -428,6 +386,8 @@
     </div>
 
   </div>
+
+  <script src="faculty-core.js"></script>
 
   <script src="dashboard.js"></script>
 </body>
