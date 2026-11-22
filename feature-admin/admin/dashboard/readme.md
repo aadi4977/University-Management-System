@@ -1,32 +1,39 @@
-# Feature: Dashboard (admin/dashboard)
+# Admin Dashboard (admin/dashboard)
 
-Landing screen after admin login. Sidebar admin-panel layout.
+## What is this page?
+The first page the admin sees after login. It gives a quick summary of the whole university.
 
-## What it does
+## What can you do here?
+- See total students, faculty, courses and the fee collected (numbers come from the real saved data)
+- See two donut charts: students by department and faculty by department
+- See the list of upcoming events
+- Press **Reset demo data** to bring back the starting demo data (useful before a presentation)
 
-Four stat cards (Total Students / Total Faculty / Total Courses / Fee
-Collected), a Student Distribution and a Faculty Distribution donut chart
-(plain CSS `conic-gradient`, no chart library), and an Upcoming Events
-list. The notification bell opens a dropdown of 5 hardcoded sample
-notifications -- pure HTML/CSS (a hidden checkbox + a `:checked ~`
-selector), no JavaScript. Click the bell again to close it; there's no
-click-outside-to-close, since that specifically needs JS.
+## What is used?
+- **HTML + CSS** - the design of the page
+- **JavaScript** (`index.js`) - makes the page work
+- **jQuery** - makes the JavaScript shorter and easier
+- **localStorage** - saves the data inside your browser (no server needed)
+- **Bootstrap Icons** - the small icons
 
-All icons (sidebar, top bar, stat cards) are [Bootstrap
-Icons](https://icons.getbootstrap.com/), loaded via CDN in `<head>` --
-needs an internet connection to render, same as any icon-font CDN.
+## Files
+- `index.html` and `index.css` - the page and its design
+- `index.js` - the working part of this page
+- `logo.png` - the GLA UMS logo
 
-## Files included
+## How the JavaScript is connected
+These 4 lines are already at the end of `index.html`, just before `</body>`:
 
-- `index.html`
-- `index.css`
-- `logo.png`
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="../../js/storage.js"></script>
+<script src="../../js/common.js"></script>
+<script src="index.js"></script>
+```
 
-## Usage / integration
-
-Sits at `admin/dashboard/` in the project. All numbers -- stat cards,
-chart values, event entries -- are hardcoded placeholders; swap them for
-real data later. Chart totals match the stat cards (342 students, 28
-faculty). The sidebar markup here is a self-contained copy, same as
-every other admin page -- see `admin/navbar/readme.md` for where that
-copy originates from.
+## Good to know
+- Demo login for this page: `admin` / `admin123`
+- All data is demo data. It is created automatically the first time you open the site.
+- Comments like `//////// Search box` in `index.js` show which code belongs to which part of the page.
+- The numbers match the Students, Faculty, Courses and Fees pages, so when you add or delete something there, this page changes too.
+- The notification bell still shows sample messages (not connected to anything).
