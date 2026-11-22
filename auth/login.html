@@ -4,15 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="login.css">
 </head>
-<body>
+<body class="auth-page">
 
   <div class="login-wrapper">
     <div class="login-card">
 
       <div class="login-illustration">
+        <span class="illus-chip"><i class="bi bi-geo-alt-fill"></i>GLA University, Mathura</span>
         <img src="login-illustration.png" alt="Student studying illustration">
+        <div class="illus-caption">
+          <h3>Your campus life, all in one place</h3>
+          <ul class="feature-list">
+            <li><i class="bi bi-calendar-check-fill"></i>Attendance and timetable</li>
+            <li><i class="bi bi-bar-chart-fill"></i>Results, grades and CGPA</li>
+            <li><i class="bi bi-cash-coin"></i>Fees and payments</li>
+          </ul>
+        </div>
       </div>
 
       <div class="login-box">
@@ -24,26 +34,49 @@
           </div>
         </div>
 
-        <form class="login-form" id="loginForm">
-          <label for="role">Login as</label>
-          <select id="role" name="role">
-            <option value="admin">Administrator</option>
-            <option value="faculty">Faculty</option>
-            <option value="student">Student</option>
-          </select>
+        <h1 class="welcome">Welcome back <span>&#128075;</span></h1>
+        <p class="subtitle">Choose who you are and sign in to continue.</p>
 
+        <div class="role-tabs" role="group" aria-label="Login as">
+          <button type="button" class="role-tab" data-role="admin"><i class="bi bi-shield-lock-fill"></i>Admin</button>
+          <button type="button" class="role-tab" data-role="faculty"><i class="bi bi-person-workspace"></i>Faculty</button>
+          <button type="button" class="role-tab active" data-role="student"><i class="bi bi-mortarboard-fill"></i>Student</button>
+        </div>
+
+        <form class="login-form" id="loginForm">
           <label for="username">Username</label>
-          <input type="text" id="username" name="username" placeholder="Enter username" required>
+          <div class="input-wrap">
+            <i class="bi bi-person-fill"></i>
+            <input type="text" id="username" name="username" placeholder="Roll no / Faculty ID / admin" autocomplete="username" required>
+          </div>
 
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter password" required>
+          <div class="input-wrap">
+            <i class="bi bi-lock-fill"></i>
+            <input type="password" id="password" name="password" placeholder="Enter password" autocomplete="current-password" required>
+            <button type="button" class="toggle-pass" aria-label="Show or hide password"><i class="bi bi-eye"></i></button>
+          </div>
 
-          <button type="submit">Login</button>
-          <p class="error-msg" id="loginError"></p>
+          <button type="submit" class="btn-login">Login<i class="bi bi-arrow-right"></i></button>
+          <p class="error-msg" id="loginError" role="alert"></p>
         </form>
+
+        <div class="demo-box">
+          <span>Quick demo login:</span>
+          <button type="button" class="demo-chip" data-fill-role="admin" data-user="admin" data-pass="admin123">Admin</button>
+          <button type="button" class="demo-chip" data-fill-role="faculty" data-user="F001" data-pass="faculty123">Faculty</button>
+          <button type="button" class="demo-chip" data-fill-role="student" data-user="2401001" data-pass="student123">Student</button>
+        </div>
+
+        <p class="auth-switch">New here? <a href="signup.html">Create an account</a></p>
       </div>
 
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>
