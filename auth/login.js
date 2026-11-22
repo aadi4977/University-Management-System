@@ -157,6 +157,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setTimeout(function () {
       var correct = demoAccounts[selectedRole];
+      // honour a password changed from Faculty > My Profile > Security
+      if (selectedRole === "faculty") {
+        try {
+          var changed = JSON.parse(localStorage.getItem("ums_fac_password"));
+          if (changed) correct = Object.assign({}, correct, { password: changed });
+        } catch (err) { /* ignore */ }
+      }
 
       if (enteredUsername === correct.username && enteredPassword === correct.password) {
         // SUCCESS
