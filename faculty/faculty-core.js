@@ -13,7 +13,15 @@
     try { return sessionStorage.getItem(key) || localStorage.getItem(key); } catch (e) { return null; }
   }
 
-  var role = readSession("ums_role");
+  // The team login (js/common.js) saves {username, role, name, ref} as JSON under "ums_session".
+  // The older standalone login saved a plain "ums_role". Accept either one.
+  var role = null;
+  try {
+    var sess = JSON.parse(readSession("ums_session"));
+    if (sess && sess.role) role = sess.role;
+  } catch (e) { /* not JSON */ }
+  if (!role) role = readSession("ums_role");
+
   if (role !== "faculty") {
     // Not signed in as faculty -> back to login
     window.location.replace("../auth/login.html");
@@ -164,7 +172,7 @@
       if (!a) return;
       if (a.hasAttribute("data-logout") || /auth\/login\.html$/.test(a.getAttribute("href") || "")) {
         try {
-          ["ums_role", "ums_user"].forEach(function (k) { sessionStorage.removeItem(k); localStorage.removeItem(k); });
+          ["ums_session", "ums_role", "ums_user"].forEach(function (k) { sessionStorage.removeItem(k); localStorage.removeItem(k); });
         } catch (err) { /* ignore */ }
         if (a.hasAttribute("data-logout")) { e.preventDefault(); window.location.href = "../auth/login.html"; }
       }
