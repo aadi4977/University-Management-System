@@ -26,6 +26,7 @@
       <li><a href="../courses/index.html"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
       <li><a href="../fee/index.html"><i class="bi bi-cash-coin"></i>Fee Status</a></li>
       <li><a href="../timetable/index.html"><i class="bi bi-clock-history"></i>Timetable</a></li>
+      <li><a href="../hierarchy/index.html"><i class="bi bi-diagram-3-fill"></i>Faculty &amp; Hierarchy</a></li>
     </ul>
 
     <div class="sidebar-footer">
@@ -37,10 +38,6 @@
 
     <div class="main">
     <header class="topbar">
-      <div class="topbar-search">
-        <i class="bi bi-search"></i>
-        <input type="text" placeholder="Search for courses, notices, or anything...">
-      </div>
       <div class="topbar-right">
         <span class="topbar-bell" aria-hidden="true">
           <i class="bi bi-bell-fill"></i>
@@ -51,7 +48,6 @@
             <div class="name">Aadi</div>
             <div class="sub">Roll No. 21BCE1234</div>
           </div>
-          <i class="bi bi-chevron-down profile-chevron"></i>
         </div>
       </div>
     </header>
@@ -69,9 +65,6 @@
             <h1>My Attendance</h1>
             <p>Keep track of your classes and attendance. Regular attendance leads to better learning!</p>
           </div>
-          <select class="page-select">
-            <option>Semester V (Jul 2025 &ndash; Dec 2025)</option>
-          </select>
         </div>
 
         <div class="stat-row">
@@ -178,10 +171,39 @@
           <p class="table-footnote">Attendance percentage is calculated as (Attended Classes / Total Classes) &times; 100</p>
         </div>
 
+        <div class="calc-card">
+          <div class="panel-card-header">
+            <h3>Attendance Calculator</h3>
+          </div>
+          <p class="calc-intro">Pick a subject and see what happens to your attendance if you attend or miss the next classes.</p>
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label for="calcSubject">Subject</label>
+              <select id="calcSubject"></select>
+            </div>
+            <div class="calc-field">
+              <label for="calcTarget">Target attendance (%)</label>
+              <input type="number" id="calcTarget" value="75" min="1" max="100">
+            </div>
+            <div class="calc-field">
+              <label for="calcAttend">Next classes I will attend</label>
+              <input type="number" id="calcAttend" value="0" min="0">
+            </div>
+            <div class="calc-field">
+              <label for="calcMiss">Next classes I will miss</label>
+              <input type="number" id="calcMiss" value="0" min="0">
+            </div>
+          </div>
+          <div class="calc-result" id="calcResult" aria-live="polite"></div>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <script src="../student.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
