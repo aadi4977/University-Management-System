@@ -110,7 +110,7 @@ body {
 .topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   padding: 14px 28px;
   background: #ffffff;
@@ -369,6 +369,7 @@ tbody tr:hover { background: #f9fafc; }
   border-radius: 999px;
   font-size: 0.76rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .pill.green { background: #dcfce7; color: #15803d; }
