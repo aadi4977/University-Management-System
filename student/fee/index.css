@@ -110,7 +110,7 @@ body {
 .topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   padding: 14px 28px;
   background: #ffffff;
@@ -369,6 +369,7 @@ tbody tr:hover { background: #f9fafc; }
   border-radius: 999px;
   font-size: 0.76rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .pill.green { background: #dcfce7; color: #15803d; }
@@ -477,3 +478,33 @@ tbody tr:hover { background: #f9fafc; }
   .topbar-search { display: none; }
   .welcome-banner { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---------- Fee Status page ---------- */
+
+.btn-pay {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-pay:hover { background: #0d3b66; }
+
+.fee-status-line { display: flex; align-items: center; gap: 8px; }
+
+/* inside the "Pay My Fee" popup */
+
+.pay-box { text-align: center; }
+.pay-amount { font-size: 1.7rem; font-weight: 700; color: #0d3b66; }
+.pay-for { font-size: 0.82rem; color: #6b7280; margin-bottom: 12px; }
+.pay-box .ums-qr { width: 210px; height: 210px; border: 1px solid #e5e7eb; border-radius: 10px; }
+.pay-note { font-size: 0.85rem; margin-top: 12px; }
+.pay-demo { font-size: 0.75rem; color: #6b7280; margin-top: 4px; }
