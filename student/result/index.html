@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Results - GLA UMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="GLA UMS logo">
+      <div>
+        <div class="name">GLA UMS</div>
+        <div class="tagline">University Management System</div>
+      </div>
+    </div>
+
+    <ul class="side-nav">
+      <li><a href="../dashboard/index.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a href="../attendance/index.html"><i class="bi bi-calendar-check-fill"></i>My Attendance</a></li>
+      <li><a href="index.html" class="active"><i class="bi bi-bar-chart-fill"></i>My Results</a></li>
+      <li><a href="../courses/index.html"><i class="bi bi-journal-bookmark-fill"></i>My Courses</a></li>
+      <li><a href="../fee/index.html"><i class="bi bi-cash-coin"></i>Fee Status</a></li>
+      <li><a href="../timetable/index.html"><i class="bi bi-clock-history"></i>Timetable</a></li>
+      <li><a href="../hierarchy/index.html"><i class="bi bi-diagram-3-fill"></i>Faculty &amp; Hierarchy</a></li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <ul class="side-nav">
+        <li><a href="../../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+      </ul>
+    </div>
+  </aside>
+
+    <div class="main">
+    <header class="topbar">
+      <div class="topbar-right">
+        <span class="topbar-bell" aria-hidden="true">
+          <i class="bi bi-bell-fill"></i>
+        </span>
+        <div class="topbar-profile">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">Aadi</div>
+            <div class="sub">Roll No. 21BCE1234</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+      <div class="content">
+
+        <nav class="breadcrumb">
+          <a href="../dashboard/index.html"><i class="bi bi-house-door"></i>Dashboard</a>
+          <span class="sep">&rsaquo;</span>
+          <span class="current">My Results</span>
+        </nav>
+
+        <div class="page-header">
+          <div>
+            <h1>My Results</h1>
+            <p>Check your semester-wise results, grades and CGPA. Keep learning, keep growing!</p>
+          </div>
+          <select class="page-select" id="semSelect" aria-label="Choose semester"></select>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="bi bi-mortarboard-fill"></i></div>
+            <div>
+              <div class="stat-value">V</div>
+              <div class="stat-label">Semester &middot; Jul 2025 &ndash; Dec 2025</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-bar-chart-fill"></i></div>
+            <div>
+              <div class="stat-value">8.42</div>
+              <div class="stat-label">SGPA &middot; Out of 10</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon purple"><i class="bi bi-star-fill"></i></div>
+            <div>
+              <div class="stat-value">8.21</div>
+              <div class="stat-label">CGPA &middot; Out of 10</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <h3>Subject-wise Result</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Credits</th>
+                <th>Grade</th>
+                <th>Marks (Out of 100)</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>BCSE0501</td>
+                <td>Computer Networks</td>
+                <td>3</td>
+                <td>A</td>
+                <td>85</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>BCSE0502</td>
+                <td>Theory Of Automata &amp; Formal Languages</td>
+                <td>3</td>
+                <td>B+</td>
+                <td>78</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>BCSE0503</td>
+                <td>Application Build &amp; Release Automation</td>
+                <td>4</td>
+                <td>A+</td>
+                <td>92</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>BCSE0504</td>
+                <td>Full Stack Using Scripting Technologies</td>
+                <td>4</td>
+                <td>A</td>
+                <td>88</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>BCSE0505</td>
+                <td>Competitive Programming</td>
+                <td>3</td>
+                <td>B</td>
+                <td>75</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>BCSE0506</td>
+                <td>Full Stack Using Scripting Technologies Lab</td>
+                <td>2</td>
+                <td>A+</td>
+                <td>94</td>
+                <td><span class="pill green">Pass</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
